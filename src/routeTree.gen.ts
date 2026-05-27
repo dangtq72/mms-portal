@@ -16,6 +16,8 @@ import { Route as HoSoMangLuoiRouteImport } from './routes/ho-so.mang-luoi'
 import { Route as HoSoLanhDaoRouteImport } from './routes/ho-so.lanh-dao'
 import { Route as HoSoCoDongRouteImport } from './routes/ho-so.co-dong'
 import { Route as CbttDinhKyIndexRouteImport } from './routes/cbtt.dinh-ky.index'
+import { Route as HoSoThanhVienMoiRouteImport } from './routes/ho-so.thanh-vien.moi'
+import { Route as HoSoThanhVienIdRouteImport } from './routes/ho-so.thanh-vien.$id'
 import { Route as CbttDinhKyMoiRouteImport } from './routes/cbtt.dinh-ky.moi'
 import { Route as CbttDinhKyIdRouteImport } from './routes/cbtt.dinh-ky.$id'
 import { Route as CbttDinhKyIdSuaRouteImport } from './routes/cbtt.dinh-ky.$id.sua'
@@ -55,6 +57,16 @@ const CbttDinhKyIndexRoute = CbttDinhKyIndexRouteImport.update({
   path: '/cbtt/dinh-ky/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HoSoThanhVienMoiRoute = HoSoThanhVienMoiRouteImport.update({
+  id: '/moi',
+  path: '/moi',
+  getParentRoute: () => HoSoThanhVienRoute,
+} as any)
+const HoSoThanhVienIdRoute = HoSoThanhVienIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => HoSoThanhVienRoute,
+} as any)
 const CbttDinhKyMoiRoute = CbttDinhKyMoiRouteImport.update({
   id: '/cbtt/dinh-ky/moi',
   path: '/cbtt/dinh-ky/moi',
@@ -77,9 +89,11 @@ export interface FileRoutesByFullPath {
   '/ho-so/co-dong': typeof HoSoCoDongRoute
   '/ho-so/lanh-dao': typeof HoSoLanhDaoRoute
   '/ho-so/mang-luoi': typeof HoSoMangLuoiRoute
-  '/ho-so/thanh-vien': typeof HoSoThanhVienRoute
+  '/ho-so/thanh-vien': typeof HoSoThanhVienRouteWithChildren
   '/cbtt/dinh-ky/$id': typeof CbttDinhKyIdRouteWithChildren
   '/cbtt/dinh-ky/moi': typeof CbttDinhKyMoiRoute
+  '/ho-so/thanh-vien/$id': typeof HoSoThanhVienIdRoute
+  '/ho-so/thanh-vien/moi': typeof HoSoThanhVienMoiRoute
   '/cbtt/dinh-ky/': typeof CbttDinhKyIndexRoute
   '/cbtt/dinh-ky/$id/sua': typeof CbttDinhKyIdSuaRoute
 }
@@ -89,9 +103,11 @@ export interface FileRoutesByTo {
   '/ho-so/co-dong': typeof HoSoCoDongRoute
   '/ho-so/lanh-dao': typeof HoSoLanhDaoRoute
   '/ho-so/mang-luoi': typeof HoSoMangLuoiRoute
-  '/ho-so/thanh-vien': typeof HoSoThanhVienRoute
+  '/ho-so/thanh-vien': typeof HoSoThanhVienRouteWithChildren
   '/cbtt/dinh-ky/$id': typeof CbttDinhKyIdRouteWithChildren
   '/cbtt/dinh-ky/moi': typeof CbttDinhKyMoiRoute
+  '/ho-so/thanh-vien/$id': typeof HoSoThanhVienIdRoute
+  '/ho-so/thanh-vien/moi': typeof HoSoThanhVienMoiRoute
   '/cbtt/dinh-ky': typeof CbttDinhKyIndexRoute
   '/cbtt/dinh-ky/$id/sua': typeof CbttDinhKyIdSuaRoute
 }
@@ -102,9 +118,11 @@ export interface FileRoutesById {
   '/ho-so/co-dong': typeof HoSoCoDongRoute
   '/ho-so/lanh-dao': typeof HoSoLanhDaoRoute
   '/ho-so/mang-luoi': typeof HoSoMangLuoiRoute
-  '/ho-so/thanh-vien': typeof HoSoThanhVienRoute
+  '/ho-so/thanh-vien': typeof HoSoThanhVienRouteWithChildren
   '/cbtt/dinh-ky/$id': typeof CbttDinhKyIdRouteWithChildren
   '/cbtt/dinh-ky/moi': typeof CbttDinhKyMoiRoute
+  '/ho-so/thanh-vien/$id': typeof HoSoThanhVienIdRoute
+  '/ho-so/thanh-vien/moi': typeof HoSoThanhVienMoiRoute
   '/cbtt/dinh-ky/': typeof CbttDinhKyIndexRoute
   '/cbtt/dinh-ky/$id/sua': typeof CbttDinhKyIdSuaRoute
 }
@@ -119,6 +137,8 @@ export interface FileRouteTypes {
     | '/ho-so/thanh-vien'
     | '/cbtt/dinh-ky/$id'
     | '/cbtt/dinh-ky/moi'
+    | '/ho-so/thanh-vien/$id'
+    | '/ho-so/thanh-vien/moi'
     | '/cbtt/dinh-ky/'
     | '/cbtt/dinh-ky/$id/sua'
   fileRoutesByTo: FileRoutesByTo
@@ -131,6 +151,8 @@ export interface FileRouteTypes {
     | '/ho-so/thanh-vien'
     | '/cbtt/dinh-ky/$id'
     | '/cbtt/dinh-ky/moi'
+    | '/ho-so/thanh-vien/$id'
+    | '/ho-so/thanh-vien/moi'
     | '/cbtt/dinh-ky'
     | '/cbtt/dinh-ky/$id/sua'
   id:
@@ -143,6 +165,8 @@ export interface FileRouteTypes {
     | '/ho-so/thanh-vien'
     | '/cbtt/dinh-ky/$id'
     | '/cbtt/dinh-ky/moi'
+    | '/ho-so/thanh-vien/$id'
+    | '/ho-so/thanh-vien/moi'
     | '/cbtt/dinh-ky/'
     | '/cbtt/dinh-ky/$id/sua'
   fileRoutesById: FileRoutesById
@@ -153,7 +177,7 @@ export interface RootRouteChildren {
   HoSoCoDongRoute: typeof HoSoCoDongRoute
   HoSoLanhDaoRoute: typeof HoSoLanhDaoRoute
   HoSoMangLuoiRoute: typeof HoSoMangLuoiRoute
-  HoSoThanhVienRoute: typeof HoSoThanhVienRoute
+  HoSoThanhVienRoute: typeof HoSoThanhVienRouteWithChildren
   CbttDinhKyIdRoute: typeof CbttDinhKyIdRouteWithChildren
   CbttDinhKyMoiRoute: typeof CbttDinhKyMoiRoute
   CbttDinhKyIndexRoute: typeof CbttDinhKyIndexRoute
@@ -210,6 +234,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CbttDinhKyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ho-so/thanh-vien/moi': {
+      id: '/ho-so/thanh-vien/moi'
+      path: '/moi'
+      fullPath: '/ho-so/thanh-vien/moi'
+      preLoaderRoute: typeof HoSoThanhVienMoiRouteImport
+      parentRoute: typeof HoSoThanhVienRoute
+    }
+    '/ho-so/thanh-vien/$id': {
+      id: '/ho-so/thanh-vien/$id'
+      path: '/$id'
+      fullPath: '/ho-so/thanh-vien/$id'
+      preLoaderRoute: typeof HoSoThanhVienIdRouteImport
+      parentRoute: typeof HoSoThanhVienRoute
+    }
     '/cbtt/dinh-ky/moi': {
       id: '/cbtt/dinh-ky/moi'
       path: '/cbtt/dinh-ky/moi'
@@ -234,6 +272,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface HoSoThanhVienRouteChildren {
+  HoSoThanhVienIdRoute: typeof HoSoThanhVienIdRoute
+  HoSoThanhVienMoiRoute: typeof HoSoThanhVienMoiRoute
+}
+
+const HoSoThanhVienRouteChildren: HoSoThanhVienRouteChildren = {
+  HoSoThanhVienIdRoute: HoSoThanhVienIdRoute,
+  HoSoThanhVienMoiRoute: HoSoThanhVienMoiRoute,
+}
+
+const HoSoThanhVienRouteWithChildren = HoSoThanhVienRoute._addFileChildren(
+  HoSoThanhVienRouteChildren,
+)
+
 interface CbttDinhKyIdRouteChildren {
   CbttDinhKyIdSuaRoute: typeof CbttDinhKyIdSuaRoute
 }
@@ -252,7 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   HoSoCoDongRoute: HoSoCoDongRoute,
   HoSoLanhDaoRoute: HoSoLanhDaoRoute,
   HoSoMangLuoiRoute: HoSoMangLuoiRoute,
-  HoSoThanhVienRoute: HoSoThanhVienRoute,
+  HoSoThanhVienRoute: HoSoThanhVienRouteWithChildren,
   CbttDinhKyIdRoute: CbttDinhKyIdRouteWithChildren,
   CbttDinhKyMoiRoute: CbttDinhKyMoiRoute,
   CbttDinhKyIndexRoute: CbttDinhKyIndexRoute,
@@ -260,3 +312,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
