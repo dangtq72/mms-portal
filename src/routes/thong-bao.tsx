@@ -282,7 +282,7 @@ function ThongBaoPage() {
                 <SelectItem value="Thấp">Thấp</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={readState} onValueChange={(v) => setReadState(v as typeof readState)}>
+            <Select value={readState} onValueChange={(v) => changeReadState(v as typeof readState)}>
               <SelectTrigger className="h-9 w-[150px]">
                 <SelectValue />
               </SelectTrigger>
