@@ -178,12 +178,27 @@ function ThongBaoPage() {
   const [readState, setReadState] = useState<"ALL" | "READ" | "UNREAD">("ALL");
   const [open, setOpen] = useState<Notice | null>(null);
 
+  // Snapshot id phù hợp với bộ lọc Đã đọc / Chưa đọc tại thời điểm chọn.
+  // Item vừa đọc trong phiên xem vẫn nằm lại danh sách (đổi style), chỉ bị
+  // lọc khỏi danh sách khi người dùng đổi bộ lọc hoặc reload trang.
+  const [stickyIds, setStickyIds] = useState<Set<string> | null>(null);
+
+  const changeReadState = (v: "ALL" | "READ" | "UNREAD") => {
+    setReadState(v);
+    if (v === "ALL") {
+      setStickyIds(null);
+    } else if (v === "UNREAD") {
+      setStickyIds(new Set(items.filter((n) => !n.read).map((n) => n.id)));
+    } else {
+      setStickyIds(new Set(items.filter((n) => n.read).map((n) => n.id)));
+    }
+  };
+
   const filtered = useMemo(() => {
     return items.filter((n) => {
       if (category !== "ALL" && n.category !== category) return false;
       if (priority !== "ALL" && n.priority !== priority) return false;
-      if (readState === "READ" && !n.read) return false;
-      if (readState === "UNREAD" && n.read) return false;
+      if (readState !== "ALL" && stickyIds && !stickyIds.has(n.id)) return false;
       if (q) {
         const s = q.toLowerCase();
         if (
@@ -195,7 +210,7 @@ function ThongBaoPage() {
       }
       return true;
     });
-  }, [items, q, category, priority, readState]);
+  }, [items, q, category, priority, readState, stickyIds]);
 
   const unreadCount = items.filter((n) => !n.read).length;
 
