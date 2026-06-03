@@ -13,8 +13,18 @@ import {
   Bell,
   ChevronDown,
   Megaphone,
+  Mail,
+  MailOpen,
   X,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { AppShell } from "@/components/AppShell";
 
 export const Route = createFileRoute("/")({
@@ -156,26 +166,37 @@ const notifications = [
     sub: "VNX • 12/05/2026 09:15",
     tag: "Giá dịch vụ",
     tone: "info" as Tone,
+    body:
+      "VNX thông báo biểu giá dịch vụ quản lý thành viên áp dụng từ năm 2026. Vui lòng tham khảo chi tiết tại phụ lục đính kèm trong mục Thông báo từ VNX.",
   },
   {
     title: "Cảnh báo vi phạm: chậm nộp tiền dịch vụ tháng 04/2026",
     sub: "VNX • 08/05/2026 14:02",
     tag: "Cảnh báo",
     tone: "danger" as Tone,
+    body:
+      "Thành viên chậm nộp tiền dịch vụ quản lý tháng 04/2026. Đề nghị hoàn tất nghĩa vụ thanh toán trước ngày 15/05/2026 để tránh bị áp dụng biện pháp xử lý theo quy chế.",
   },
   {
     title: "Nhắc nhở: hồ sơ đăng ký thành viên đến bước thẩm định",
     sub: "VNX • 05/05/2026 10:30",
     tag: "Quy trình",
     tone: "warning" as Tone,
+    body:
+      "Hồ sơ đăng ký thành viên đã chuyển sang bước thẩm định. Đề nghị bộ phận phụ trách phối hợp cung cấp tài liệu bổ sung khi VNX yêu cầu.",
   },
   {
     title: "Cảnh báo nộp CBTT chậm theo Thông tư 96",
     sub: "VNX • 02/05/2026 16:48",
     tag: "Cảnh báo",
     tone: "purple" as Tone,
+    body:
+      "Phát hiện báo cáo CBTT định kỳ nộp chậm so với thời hạn quy định tại Thông tư 96/2020/TT-BTC. Đề nghị rà soát và đính chính trong thời gian sớm nhất.",
   },
 ];
+
+type Notification = (typeof notifications)[number];
+
 
 const quickActions: { code: string; title: string; desc: string; tone: Tone }[] = [
   { code: "TT", title: "Thông tin thành viên", desc: "Xem hồ sơ và dữ liệu liên quan.", tone: "info" },
@@ -187,13 +208,23 @@ const quickActions: { code: string; title: string; desc: string; tone: Tone }[] 
 function Dashboard() {
   const [readIds, setReadIds] = useState<Set<string>>(new Set());
   const [activeStat, setActiveStat] = useState<StatKey | null>(null);
-  const visibleNotifications = notifications.filter((n) => !readIds.has(n.title));
+  const [openNotice, setOpenNotice] = useState<Notification | null>(null);
+  // Hiển thị toàn bộ thông báo trong phiên xem; item đã đọc giữ nguyên vị trí
+  // nhưng đổi style (không bold, icon MailOpen, bỏ nền nhạt). Khi reload trang
+  // thì state reset, danh sách lại hiển thị như chưa đọc theo dữ liệu mock.
+  const visibleNotifications = notifications;
+  const unreadCount = notifications.filter((n) => !readIds.has(n.title)).length;
   const markRead = (title: string) =>
     setReadIds((prev) => {
+      if (prev.has(title)) return prev;
       const next = new Set(prev);
       next.add(title);
       return next;
     });
+  const openNotification = (n: Notification) => {
+    setOpenNotice(n);
+    markRead(n.title);
+  };
   const markAllRead = () => setReadIds(new Set(notifications.map((n) => n.title)));
   const [today, setToday] = useState("");
   useEffect(() => {
@@ -411,11 +442,16 @@ function Dashboard() {
             <div className="flex items-center gap-2">
               <Bell className="h-[20px] w-[20px] text-[var(--color-brand)]" />
               <h3 className="font-semibold text-xl">Thông báo từ VNX</h3>
+              {unreadCount > 0 && (
+                <span className="inline-flex items-center rounded-full bg-[#fbeaea] px-2 py-0.5 text-xs font-medium text-[#de3b3d]">
+                  {unreadCount} chưa đọc
+                </span>
+              )}
             </div>
             <button
               type="button"
               onClick={markAllRead}
-              disabled={visibleNotifications.length === 0}
+              disabled={unreadCount === 0}
               aria-label="Đánh dấu tất cả thông báo từ VNX là đã đọc"
               className="flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -425,16 +461,30 @@ function Dashboard() {
           <p className="mb-3 text-xs text-muted-foreground">
             Giá dịch vụ, cảnh báo vi phạm, nhắc nhở quy trình hồ sơ thành viên.
           </p>
-          {visibleNotifications.length === 0 ? (
-            <p className="py-6 text-center text-sm text-muted-foreground">Không có thông báo chưa đọc.</p>
-          ) : (
-            <ul className="divide-y divide-border">
-              {visibleNotifications.map((n) => {
-                const t = toneMap[n.tone];
-                return (
-                  <li key={n.title} className="flex items-start justify-between gap-3 py-3">
+          <ul className="divide-y divide-border">
+            {visibleNotifications.map((n) => {
+              const t = toneMap[n.tone];
+              const isRead = readIds.has(n.title);
+              return (
+                <li key={n.title}>
+                  <button
+                    type="button"
+                    onClick={() => openNotification(n)}
+                    className={`flex w-full items-start justify-between gap-3 px-2 py-3 text-left transition hover:bg-accent/40 ${
+                      !isRead ? "bg-[var(--color-brand)]/5" : ""
+                    }`}
+                  >
+                    <div className="mt-0.5 shrink-0">
+                      {isRead ? (
+                        <MailOpen className="h-4 w-4 text-muted-foreground" />
+                      ) : (
+                        <Mail className="h-4 w-4 text-[var(--color-brand)]" />
+                      )}
+                    </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium">{n.title}</p>
+                      <p className={`text-sm ${!isRead ? "font-semibold" : "font-normal text-muted-foreground"}`}>
+                        {n.title}
+                      </p>
                       <p className="text-xs text-muted-foreground">{n.sub}</p>
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
@@ -445,22 +495,56 @@ function Dashboard() {
                         {n.tag}
                       </span>
                     </div>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
           <div className="mt-4 flex justify-center">
-            <button
-              type="button"
+            <Link
+              to="/thong-bao"
               aria-label="Xem tất cả thông báo từ VNX"
               className="text-xs font-medium text-[var(--color-brand)] hover:underline"
             >
               Tất cả thông báo
-            </button>
+            </Link>
           </div>
         </section>
         </div>
+
+        <Dialog open={!!openNotice} onOpenChange={(v) => !v && setOpenNotice(null)}>
+          <DialogContent className="max-w-xl">
+            {openNotice && (
+              <>
+                <DialogHeader>
+                  <div className="mb-1 flex flex-wrap items-center gap-2">
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${toneMap[openNotice.tone].bg} ${toneMap[openNotice.tone].text}`}
+                      style={openNotice.tag === "Cảnh báo" ? { color: "#de3b3d", backgroundColor: "#fbeaea" } : undefined}
+                    >
+                      {openNotice.tag}
+                    </span>
+                  </div>
+                  <DialogTitle className="text-lg leading-snug">{openNotice.title}</DialogTitle>
+                  <DialogDescription>{openNotice.sub}</DialogDescription>
+                </DialogHeader>
+                <div className="whitespace-pre-line text-sm leading-relaxed text-foreground">
+                  {openNotice.body}
+                </div>
+                <DialogFooter>
+                  <button
+                    type="button"
+                    onClick={() => setOpenNotice(null)}
+                    className="rounded-md border border-border px-3 py-1.5 text-sm font-medium hover:bg-accent"
+                  >
+                    Đóng
+                  </button>
+                </DialogFooter>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
+
 
       </main>
     </AppShell>
