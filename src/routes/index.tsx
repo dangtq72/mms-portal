@@ -163,7 +163,7 @@ const urgent = [
 const notifications = [
   {
     title: "Thông báo về giá dịch vụ quản lý thành viên 2026",
-    sub: "• 12/05/2026 09:15",
+    sub: "12/05/2026 09:15",
     tag: "Giá dịch vụ",
     tone: "info" as Tone,
     body:
@@ -171,7 +171,7 @@ const notifications = [
   },
   {
     title: "Cảnh báo vi phạm: chậm nộp tiền dịch vụ tháng 04/2026",
-    sub: "• 08/05/2026 14:02",
+    sub: "08/05/2026 14:02",
     tag: "Cảnh báo",
     tone: "danger" as Tone,
     body:
@@ -179,7 +179,7 @@ const notifications = [
   },
   {
     title: "Nhắc nhở: hồ sơ đăng ký thành viên đến bước thẩm định",
-    sub: "• 05/05/2026 10:30",
+    sub: "05/05/2026 10:30",
     tag: "Quy trình",
     tone: "warning" as Tone,
     body:
@@ -187,7 +187,7 @@ const notifications = [
   },
   {
     title: "Cảnh báo nộp CBTT chậm theo Thông tư 96",
-    sub: "• 02/05/2026 16:48",
+    sub: "02/05/2026 16:48",
     tag: "Cảnh báo",
     tone: "purple" as Tone,
     body:
