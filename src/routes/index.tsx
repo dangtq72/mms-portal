@@ -166,26 +166,37 @@ const notifications = [
     sub: "VNX • 12/05/2026 09:15",
     tag: "Giá dịch vụ",
     tone: "info" as Tone,
+    body:
+      "VNX thông báo biểu giá dịch vụ quản lý thành viên áp dụng từ năm 2026. Vui lòng tham khảo chi tiết tại phụ lục đính kèm trong mục Thông báo từ VNX.",
   },
   {
     title: "Cảnh báo vi phạm: chậm nộp tiền dịch vụ tháng 04/2026",
     sub: "VNX • 08/05/2026 14:02",
     tag: "Cảnh báo",
     tone: "danger" as Tone,
+    body:
+      "Thành viên chậm nộp tiền dịch vụ quản lý tháng 04/2026. Đề nghị hoàn tất nghĩa vụ thanh toán trước ngày 15/05/2026 để tránh bị áp dụng biện pháp xử lý theo quy chế.",
   },
   {
     title: "Nhắc nhở: hồ sơ đăng ký thành viên đến bước thẩm định",
     sub: "VNX • 05/05/2026 10:30",
     tag: "Quy trình",
     tone: "warning" as Tone,
+    body:
+      "Hồ sơ đăng ký thành viên đã chuyển sang bước thẩm định. Đề nghị bộ phận phụ trách phối hợp cung cấp tài liệu bổ sung khi VNX yêu cầu.",
   },
   {
     title: "Cảnh báo nộp CBTT chậm theo Thông tư 96",
     sub: "VNX • 02/05/2026 16:48",
     tag: "Cảnh báo",
     tone: "purple" as Tone,
+    body:
+      "Phát hiện báo cáo CBTT định kỳ nộp chậm so với thời hạn quy định tại Thông tư 96/2020/TT-BTC. Đề nghị rà soát và đính chính trong thời gian sớm nhất.",
   },
 ];
+
+type Notification = (typeof notifications)[number];
+
 
 const quickActions: { code: string; title: string; desc: string; tone: Tone }[] = [
   { code: "TT", title: "Thông tin thành viên", desc: "Xem hồ sơ và dữ liệu liên quan.", tone: "info" },
