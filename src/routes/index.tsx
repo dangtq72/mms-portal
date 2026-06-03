@@ -442,11 +442,16 @@ function Dashboard() {
             <div className="flex items-center gap-2">
               <Bell className="h-[20px] w-[20px] text-[var(--color-brand)]" />
               <h3 className="font-semibold text-xl">Thông báo từ VNX</h3>
+              {unreadCount > 0 && (
+                <span className="inline-flex items-center rounded-full bg-[#fbeaea] px-2 py-0.5 text-xs font-medium text-[#de3b3d]">
+                  {unreadCount} chưa đọc
+                </span>
+              )}
             </div>
             <button
               type="button"
               onClick={markAllRead}
-              disabled={visibleNotifications.length === 0}
+              disabled={unreadCount === 0}
               aria-label="Đánh dấu tất cả thông báo từ VNX là đã đọc"
               className="flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -456,16 +461,30 @@ function Dashboard() {
           <p className="mb-3 text-xs text-muted-foreground">
             Giá dịch vụ, cảnh báo vi phạm, nhắc nhở quy trình hồ sơ thành viên.
           </p>
-          {visibleNotifications.length === 0 ? (
-            <p className="py-6 text-center text-sm text-muted-foreground">Không có thông báo chưa đọc.</p>
-          ) : (
-            <ul className="divide-y divide-border">
-              {visibleNotifications.map((n) => {
-                const t = toneMap[n.tone];
-                return (
-                  <li key={n.title} className="flex items-start justify-between gap-3 py-3">
+          <ul className="divide-y divide-border">
+            {visibleNotifications.map((n) => {
+              const t = toneMap[n.tone];
+              const isRead = readIds.has(n.title);
+              return (
+                <li key={n.title}>
+                  <button
+                    type="button"
+                    onClick={() => openNotification(n)}
+                    className={`flex w-full items-start justify-between gap-3 px-2 py-3 text-left transition hover:bg-accent/40 ${
+                      !isRead ? "bg-[var(--color-brand)]/5" : ""
+                    }`}
+                  >
+                    <div className="mt-0.5 shrink-0">
+                      {isRead ? (
+                        <MailOpen className="h-4 w-4 text-muted-foreground" />
+                      ) : (
+                        <Mail className="h-4 w-4 text-[var(--color-brand)]" />
+                      )}
+                    </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium">{n.title}</p>
+                      <p className={`text-sm ${!isRead ? "font-semibold" : "font-normal text-muted-foreground"}`}>
+                        {n.title}
+                      </p>
                       <p className="text-xs text-muted-foreground">{n.sub}</p>
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
@@ -476,22 +495,56 @@ function Dashboard() {
                         {n.tag}
                       </span>
                     </div>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
           <div className="mt-4 flex justify-center">
-            <button
-              type="button"
+            <Link
+              to="/thong-bao"
               aria-label="Xem tất cả thông báo từ VNX"
               className="text-xs font-medium text-[var(--color-brand)] hover:underline"
             >
               Tất cả thông báo
-            </button>
+            </Link>
           </div>
         </section>
         </div>
+
+        <Dialog open={!!openNotice} onOpenChange={(v) => !v && setOpenNotice(null)}>
+          <DialogContent className="max-w-xl">
+            {openNotice && (
+              <>
+                <DialogHeader>
+                  <div className="mb-1 flex flex-wrap items-center gap-2">
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${toneMap[openNotice.tone].bg} ${toneMap[openNotice.tone].text}`}
+                      style={openNotice.tag === "Cảnh báo" ? { color: "#de3b3d", backgroundColor: "#fbeaea" } : undefined}
+                    >
+                      {openNotice.tag}
+                    </span>
+                  </div>
+                  <DialogTitle className="text-lg leading-snug">{openNotice.title}</DialogTitle>
+                  <DialogDescription>{openNotice.sub}</DialogDescription>
+                </DialogHeader>
+                <div className="whitespace-pre-line text-sm leading-relaxed text-foreground">
+                  {openNotice.body}
+                </div>
+                <DialogFooter>
+                  <button
+                    type="button"
+                    onClick={() => setOpenNotice(null)}
+                    className="rounded-md border border-border px-3 py-1.5 text-sm font-medium hover:bg-accent"
+                  >
+                    Đóng
+                  </button>
+                </DialogFooter>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
+
 
       </main>
     </AppShell>
