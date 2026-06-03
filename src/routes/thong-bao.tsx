@@ -404,7 +404,7 @@ function ThongBaoPage() {
                 </div>
                 <DialogTitle className="text-lg leading-snug">{open.title}</DialogTitle>
                 <DialogDescription>
-                  {open.sender} • {format(new Date(open.sentAt), "dd/MM/yyyy HH:mm")}
+                  {format(new Date(open.sentAt), "dd/MM/yyyy HH:mm")}
                 </DialogDescription>
               </DialogHeader>
               <div className="whitespace-pre-line text-sm leading-relaxed text-foreground">
