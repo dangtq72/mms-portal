@@ -65,7 +65,7 @@ export function AppShell({
             <img
               src={vnxLogo.url}
               alt="Vietnam Exchange - Sở Giao dịch Chứng khoán Việt Nam"
-              className="h-10 w-auto shrink-0"
+              className="h-12 w-auto shrink-0"
             />
             <div className="border-l border-border pl-3">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
