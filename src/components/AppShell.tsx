@@ -10,6 +10,7 @@ import {
   FolderKanban,
 } from "lucide-react";
 import type { ReactNode } from "react";
+import vnxLogo from "@/assets/vnx-logo.png.asset.json";
 
 export type NavKey = "dashboard" | "ho-so" | "cbtt" | "bao-cao" | "thong-bao" | "tai-khoan";
 
@@ -60,11 +61,18 @@ export function AppShell({
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border bg-[var(--color-surface)]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-          <Link to="/" className="block">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Member Workspace
-            </p>
-            <h1 className="text-lg font-semibold leading-tight">Cổng thành viên</h1>
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src={vnxLogo.url}
+              alt="Vietnam Exchange - Sở Giao dịch Chứng khoán Việt Nam"
+              className="h-10 w-auto shrink-0"
+            />
+            <div className="border-l border-border pl-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Member Workspace
+              </p>
+              <h1 className="text-lg font-semibold leading-tight">Cổng thành viên</h1>
+            </div>
           </Link>
           <div className="flex items-center gap-2 text-xs">
             <button
