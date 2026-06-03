@@ -60,12 +60,12 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border bg-[var(--color-surface)]">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
           <Link to="/" className="flex items-center gap-3">
             <img
               src={vnxLogo.url}
               alt="Vietnam Exchange - Sở Giao dịch Chứng khoán Việt Nam"
-              className="h-10 w-auto shrink-0"
+              className="h-14 w-auto shrink-0"
             />
             <div className="border-l border-border pl-3">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -96,7 +96,7 @@ export function AppShell({
         </div>
       </header>
 
-      <nav aria-label="Điều hướng chính" className="sticky top-[57px] z-30 border-b border-border bg-[var(--color-surface)]">
+      <nav aria-label="Điều hướng chính" className="sticky top-[72px] z-30 border-b border-border bg-[var(--color-surface)]">
         <div className="mx-auto flex max-w-7xl items-center gap-1 px-6">
           {NAV.map((item) => {
             const Icon = item.icon;
