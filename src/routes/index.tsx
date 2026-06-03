@@ -13,8 +13,18 @@ import {
   Bell,
   ChevronDown,
   Megaphone,
+  Mail,
+  MailOpen,
   X,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { AppShell } from "@/components/AppShell";
 
 export const Route = createFileRoute("/")({
