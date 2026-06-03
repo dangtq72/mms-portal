@@ -208,13 +208,23 @@ const quickActions: { code: string; title: string; desc: string; tone: Tone }[] 
 function Dashboard() {
   const [readIds, setReadIds] = useState<Set<string>>(new Set());
   const [activeStat, setActiveStat] = useState<StatKey | null>(null);
-  const visibleNotifications = notifications.filter((n) => !readIds.has(n.title));
+  const [openNotice, setOpenNotice] = useState<Notification | null>(null);
+  // Hiển thị toàn bộ thông báo trong phiên xem; item đã đọc giữ nguyên vị trí
+  // nhưng đổi style (không bold, icon MailOpen, bỏ nền nhạt). Khi reload trang
+  // thì state reset, danh sách lại hiển thị như chưa đọc theo dữ liệu mock.
+  const visibleNotifications = notifications;
+  const unreadCount = notifications.filter((n) => !readIds.has(n.title)).length;
   const markRead = (title: string) =>
     setReadIds((prev) => {
+      if (prev.has(title)) return prev;
       const next = new Set(prev);
       next.add(title);
       return next;
     });
+  const openNotification = (n: Notification) => {
+    setOpenNotice(n);
+    markRead(n.title);
+  };
   const markAllRead = () => setReadIds(new Set(notifications.map((n) => n.title)));
   const [today, setToday] = useState("");
   useEffect(() => {
