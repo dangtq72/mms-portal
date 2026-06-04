@@ -67,8 +67,12 @@
   --foreground: oklch(0.18 0.02 260);
   --surface: oklch(1 0 0);
   --color-surface: var(--surface);
-  --brand: oklch(0.45 0.15 260);
+  --brand: oklch(0.473 0.129 251.8);
   --brand-foreground: oklch(0.99 0 0);
+  --brand-glow: oklch(0.62 0.14 248);
+  --brand-dark: oklch(0.36 0.11 252);
+  --color-brand-glow: var(--brand-glow);
+  --color-brand-dark: var(--brand-dark);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --info: oklch(0.6 0.15 250);
