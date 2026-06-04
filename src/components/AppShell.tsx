@@ -60,7 +60,7 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border bg-[var(--color-surface)]">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
+        <div className="flex items-center justify-between px-6 py-2">
           <Link to="/" className="flex items-center gap-3">
             <img
               src={vnxLogo.url}
@@ -96,62 +96,61 @@ export function AppShell({
         </div>
       </header>
 
-      <nav aria-label="Điều hướng chính" className="sticky top-[72px] z-30 border-b border-border bg-[var(--color-surface)]">
-        <div className="mx-auto flex max-w-7xl items-center gap-1 px-6">
-          {NAV.map((item) => {
-            const Icon = item.icon;
-            const active = item.key === activeKey;
-            const baseBtn = `relative flex items-center gap-2 whitespace-nowrap px-3 py-3 text-sm font-medium transition-colors ${
-              active
-                ? "text-[var(--color-brand)] after:absolute after:inset-x-2 after:-bottom-px after:h-0.5 after:rounded-full after:bg-[var(--color-brand)]"
-                : "text-muted-foreground hover:text-foreground"
-            }`;
-            return (
-              <div key={item.key} className="group relative">
-                {item.children ? (
-                  <button
-                    type="button"
-                    aria-haspopup="menu"
-                    aria-current={active ? "page" : undefined}
-                    className={baseBtn}
-                  >
-                    <Icon className="h-4 w-4" aria-hidden="true" />
-                    {item.label}
-                    <ChevronDown
-                      className="h-3.5 w-3.5 transition-transform group-hover:rotate-180"
-                      aria-hidden="true"
-                    />
-                  </button>
-                ) : (
-                  <Link to={item.to!} className={baseBtn} aria-current={active ? "page" : undefined}>
-                    <Icon className="h-4 w-4" aria-hidden="true" />
-                    {item.label}
-                  </Link>
-                )}
-                {item.children && (
-                  <div
-                    role="menu"
-                    className="invisible absolute left-0 top-full z-30 min-w-[220px] -translate-y-1 rounded-md border border-border bg-[var(--color-surface)] p-1 opacity-0 shadow-lg transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
-                  >
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.to}
-                        to={child.to}
-                        role="menuitem"
-                        className="flex w-full items-center rounded-sm px-3 py-2 text-left text-sm text-foreground hover:bg-[var(--color-brand)]/10 hover:text-[var(--color-brand)]"
+      <div className="flex">
+        <aside
+          aria-label="Điều hướng chính"
+          className="sticky top-[72px] z-30 hidden h-[calc(100vh-72px)] w-64 shrink-0 overflow-y-auto border-r border-border bg-[var(--color-surface)] md:block"
+        >
+          <nav className="flex flex-col gap-0.5 p-3">
+            {NAV.map((item) => {
+              const Icon = item.icon;
+              const active = item.key === activeKey;
+              const baseBtn = `flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                active
+                  ? "bg-[var(--color-brand)]/10 text-[var(--color-brand)]"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+              }`;
+              return (
+                <div key={item.key} className="flex flex-col">
+                  {item.children ? (
+                    <>
+                      <div
+                        className={baseBtn}
+                        aria-current={active ? "page" : undefined}
                       >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </nav>
+                        <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                        <span className="flex-1">{item.label}</span>
+                      </div>
+                      <div className="ml-7 mt-0.5 flex flex-col border-l border-border pl-2">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.to}
+                            to={child.to}
+                            className="rounded-sm px-2 py-1.5 text-sm text-muted-foreground hover:bg-[var(--color-brand)]/10 hover:text-[var(--color-brand)]"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      to={item.to!}
+                      className={baseBtn}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      <span>{item.label}</span>
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+        </aside>
 
-      {children}
+        <div className="min-w-0 flex-1">{children}</div>
+      </div>
     </div>
   );
 }
