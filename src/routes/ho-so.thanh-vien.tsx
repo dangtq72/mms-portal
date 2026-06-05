@@ -154,7 +154,7 @@ function MemberListPage() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Quản lý hồ sơ
+              Hồ sơ Thành viên
             </p>
             <h1 className="text-xl font-semibold">Quản lý hồ sơ thành viên</h1>
           </div>

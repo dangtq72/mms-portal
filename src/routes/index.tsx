@@ -199,7 +199,7 @@ type Notification = (typeof notifications)[number];
 
 
 const quickActions: { code: string; title: string; desc: string; tone: Tone }[] = [
-  { code: "TT", title: "Thông tin thành viên", desc: "Xem hồ sơ và dữ liệu liên quan.", tone: "info" },
+  { code: "TT", title: "Thông tin hồ sơ thành viên", desc: "Xem hồ sơ và dữ liệu liên quan.", tone: "info" },
   { code: "HS", title: "Hồ sơ active", desc: "Mở nhanh hồ sơ đang hiệu lực.", tone: "success" },
   { code: "CB", title: "Công bố thông tin", desc: "Tạo mới, theo dõi và gửi duyệt CBTT.", tone: "warning" },
   { code: "LS", title: "Lịch sử xử lý", desc: "Tra cứu lịch sử hồ sơ và CBTT.", tone: "purple" },
