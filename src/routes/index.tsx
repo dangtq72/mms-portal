@@ -471,7 +471,7 @@ function Dashboard() {
                     type="button"
                     onClick={() => openNotification(n)}
                     className={`flex w-full items-start justify-between gap-3 px-2 py-3 text-left transition hover:bg-accent/40 ${
-                      !isRead ? "bg-[var(--color-brand)]/5" : ""
+                      !isRead ? "bg-[var(--color-brand)]/5 bg-white" : ""
                     }`}
                   >
                     <div className="mt-0.5 shrink-0">
