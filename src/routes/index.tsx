@@ -478,7 +478,7 @@ function Dashboard() {
                       {isRead ? (
                         <MailOpen className="h-4 w-4 text-muted-foreground" />
                       ) : (
-                        <Mail className="h-4 w-4 text-[var(--color-brand)]" />
+                        <Mail className="h-4 w-4 text-[var(--color-brand)] bg-[#145c9f]" />
                       )}
                     </div>
                     <div className="min-w-0 flex-1">
