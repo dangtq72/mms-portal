@@ -400,7 +400,7 @@ function Dashboard() {
               return (
                 <li
                   key={u.title}
-                  className="relative flex items-center justify-between gap-3 rounded-lg border border-border bg-background px-4 py-3 transition hover:bg-accent"
+                  className="relative flex items-center justify-between gap-3 rounded-lg border border-border bg-background px-4 py-3 transition hover:bg-accent bg-white border-[#155ca2]"
                 >
                   <span className={`absolute inset-y-2 left-0 w-1 rounded-r-md ${t.bar}`} />
                   <div className="min-w-0 flex-1 pl-2">
