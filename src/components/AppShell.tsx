@@ -35,7 +35,7 @@ const FAVORITES: LeafItem[] = [
   { label: "Dashboard", to: "/", icon: LayoutDashboard, matchKey: "dashboard" },
   { label: "Thành viên", to: "/ho-so/thanh-vien", icon: Users },
   { label: "Báo cáo định kỳ", to: "/cbtt/dinh-ky", icon: FileText },
-  { label: "Hóa đơn", to: "/tai-khoan", icon: Receipt },
+  { label: "Giá dịch vụ", to: "/tai-khoan", icon: Receipt },
 ];
 
 const SECTIONS: Section[] = [
@@ -66,7 +66,7 @@ const SECTIONS: Section[] = [
     ],
   },
   { id: "bao-cao", label: "Báo cáo", items: [{ label: "Báo cáo", to: "/bao-cao", matchKey: "bao-cao" }] },
-  { id: "tai-chinh", label: "Tài chính", items: [{ label: "Hóa đơn", to: "/tai-khoan" }] },
+  { id: "tai-chinh", label: "Tài chính", items: [{ label: "Giá dịch vụ", to: "/tai-khoan" }] },
   { id: "van-hanh", label: "Vận hành", items: [{ label: "Tổng quan", to: "/" }] },
   { id: "quan-tri", label: "Quản trị", items: [{ label: "Tài khoản", to: "/tai-khoan", matchKey: "tai-khoan" }] },
 ];
