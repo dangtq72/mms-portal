@@ -33,7 +33,7 @@ type Section = {
 
 const FAVORITES: LeafItem[] = [
   { label: "Dashboard", to: "/", icon: LayoutDashboard, matchKey: "dashboard" },
-  { label: "Hồ sơ Thành viên", to: "/ho-so/thanh-vien", icon: Users },
+  { label: "Hồ sơ Thành viên", to: "https://admin-art-attach.lovable.app/ho-so", icon: Users },
   { label: "Báo cáo định kỳ", to: "/cbtt/dinh-ky", icon: FileText },
   { label: "Giá dịch vụ", to: "/tai-khoan", icon: Receipt },
 ];
@@ -53,7 +53,7 @@ const SECTIONS: Section[] = [
     label: "Quản lý hồ sơ",
     defaultOpen: true,
     items: [
-      { label: "Hồ sơ thành viên", to: "/ho-so/thanh-vien", icon: Users, matchKey: "ho-so" },
+      { label: "Hồ sơ thành viên", to: "https://admin-art-attach.lovable.app/ho-so", icon: Users, matchKey: "ho-so" },
     ],
   },
   {
@@ -105,7 +105,8 @@ export function AppShell({
     [q],
   );
 
-  const isActive = (item: LeafItem) => item.matchKey === activeKey;
+  const isExternal = (to: string) => to.startsWith("http");
+  const isActive = (item: LeafItem) => !isExternal(item.to) && item.matchKey === activeKey;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -151,20 +152,33 @@ export function AppShell({
                 {filteredFavs.map((item) => {
                   const Icon = item.icon ?? LayoutDashboard;
                   const active = isActive(item);
+                  const external = isExternal(item.to);
                   return (
                     <div key={item.to} className="group flex items-center gap-1">
-                      <Link
-                        to={item.to}
-                        className={`flex flex-1 items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors ${
-                          active
-                            ? "bg-[var(--color-brand)]/10 font-medium text-[var(--color-brand)]"
-                            : "text-foreground hover:bg-accent"
-                        }`}
-                        aria-current={active ? "page" : undefined}
-                      >
-                        <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-                        <span className="flex-1 truncate">{item.label}</span>
-                      </Link>
+                      {external ? (
+                        <a
+                          href={item.to}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-1 items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors text-foreground hover:bg-accent"
+                        >
+                          <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          <span className="flex-1 truncate">{item.label}</span>
+                        </a>
+                      ) : (
+                        <Link
+                          to={item.to}
+                          className={`flex flex-1 items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors ${
+                            active
+                              ? "bg-[var(--color-brand)]/10 font-medium text-[var(--color-brand)]"
+                              : "text-foreground hover:bg-accent"
+                          }`}
+                          aria-current={active ? "page" : undefined}
+                        >
+                          <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          <span className="flex-1 truncate">{item.label}</span>
+                        </Link>
+                      )}
                       <button
                         type="button"
                         aria-label={`Bỏ ghim ${item.label}`}
@@ -200,24 +214,41 @@ export function AppShell({
                         const Icon = item.icon;
                         const active = isActive(item);
                         const pinned = favKeys.has(item.to);
+                        const external = isExternal(item.to);
                         return (
                           <div key={item.to} className="group flex items-center gap-1">
-                            <Link
-                              to={item.to}
-                              className={`flex flex-1 items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors ${
-                                active
-                                  ? "bg-[var(--color-brand)]/10 font-medium text-[var(--color-brand)]"
-                                  : "text-foreground hover:bg-accent"
-                              }`}
-                              aria-current={active ? "page" : undefined}
-                            >
-                              {Icon ? (
-                                <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-                              ) : (
-                                <span className="h-4 w-4 shrink-0" />
-                              )}
-                              <span className="flex-1 truncate">{item.label}</span>
-                            </Link>
+                            {external ? (
+                              <a
+                                href={item.to}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex flex-1 items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors text-foreground hover:bg-accent"
+                              >
+                                {Icon ? (
+                                  <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                                ) : (
+                                  <span className="h-4 w-4 shrink-0" />
+                                )}
+                                <span className="flex-1 truncate">{item.label}</span>
+                              </a>
+                            ) : (
+                              <Link
+                                to={item.to}
+                                className={`flex flex-1 items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors ${
+                                  active
+                                    ? "bg-[var(--color-brand)]/10 font-medium text-[var(--color-brand)]"
+                                    : "text-foreground hover:bg-accent"
+                                }`}
+                                aria-current={active ? "page" : undefined}
+                              >
+                                {Icon ? (
+                                  <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                                ) : (
+                                  <span className="h-4 w-4 shrink-0" />
+                                )}
+                                <span className="flex-1 truncate">{item.label}</span>
+                              </Link>
+                            )}
                             <button
                               type="button"
                               aria-label={pinned ? `Bỏ ghim ${item.label}` : `Ghim ${item.label}`}
