@@ -53,7 +53,7 @@ const SECTIONS: Section[] = [
     label: "Quản lý hồ sơ",
     defaultOpen: true,
     items: [
-      { label: "Hồ sơ", to: "/ho-so/thanh-vien", icon: FolderOpen, matchKey: "ho-so" },
+      { label: "Hồ sơ thành viên", to: "/ho-so/thanh-vien", icon: FolderOpen, matchKey: "ho-so" },
     ],
   },
   {
