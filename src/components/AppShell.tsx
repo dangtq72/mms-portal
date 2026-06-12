@@ -13,7 +13,7 @@ import {
   FolderOpen,
 } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
-import vnxLogo from "@/assets/vnx-logo.png.asset.json";
+import vnxLogo from "@/assets/vnx-logo-new.png.asset.json";
 
 export type NavKey = "dashboard" | "ho-so" | "cbtt" | "bao-cao" | "thong-bao" | "tai-khoan";
 
@@ -116,8 +116,8 @@ export function AppShell({
           className="sticky top-0 z-30 hidden h-screen w-72 shrink-0 flex-col border-r border-border bg-[var(--color-surface)] md:flex"
         >
           {/* Brand */}
-          <Link to="/" className="flex items-center gap-3 px-5 pt-5 pb-4">
-            <img src={vnxLogo.url} alt="VNX" className="h-11 w-auto shrink-0" />
+          <Link to="/" className="flex items-center gap-2 px-2 pt-2 pb-2">
+            <img src={vnxLogo.url} alt="VNX" className="h-16 w-auto shrink-0" />
             <div className="leading-tight">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Vietnam Exchange
