@@ -119,7 +119,7 @@ export function AppShell({
           <Link to="/" className="flex items-center gap-2 px-2 pt-2 pb-2">
             <img src={vnxLogo.url} alt="VNX" className="h-8 w-auto shrink-0" />
             <div className="leading-tight">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: '#2E256A' }}>
                 Vietnam Exchange
               </p>
               <h1 className="text-base font-semibold">MMS Portal</h1>
