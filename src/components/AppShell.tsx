@@ -292,7 +292,7 @@ export function AppShell({
             {(() => {
               const PageIcon = PAGE_TITLES[activeKey].icon;
               return (
-                <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em]" style={{ color: '#2E256A' }}>
+                <div className="flex items-center gap-2 text-lg font-bold uppercase tracking-[0.12em]" style={{ color: '#2E256A' }}>
                   <PageIcon className="h-4 w-4" aria-hidden="true" />
                   <span>{PAGE_TITLES[activeKey].label}</span>
                 </div>
