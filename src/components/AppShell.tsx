@@ -17,6 +17,15 @@ import vnxLogo from "@/assets/vnx-logo-new.png.asset.json";
 
 export type NavKey = "dashboard" | "ho-so" | "cbtt" | "bao-cao" | "thong-bao" | "tai-khoan";
 
+const PAGE_TITLES: Record<NavKey, { label: string; icon: typeof LayoutDashboard }> = {
+  dashboard: { label: "DASHBOARD", icon: LayoutDashboard },
+  "ho-so": { label: "HỒ SƠ THÀNH VIÊN", icon: Users },
+  cbtt: { label: "CÔNG BỐ THÔNG TIN", icon: FileText },
+  "bao-cao": { label: "BÁO CÁO", icon: FolderOpen },
+  "thong-bao": { label: "THÔNG BÁO TỪ VNX", icon: BellRing },
+  "tai-khoan": { label: "TÀI KHOẢN", icon: Receipt },
+};
+
 type LeafItem = {
   label: string;
   to: string;
@@ -279,24 +288,35 @@ export function AppShell({
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-20 flex items-center justify-end gap-2 border-b border-border bg-[var(--color-surface)] px-6 py-2 text-xs">
-            <button
-              type="button"
-              aria-label="Chọn thành viên"
-              aria-haspopup="listbox"
-              className="flex items-center gap-2 rounded-md border border-border px-3 py-1.5 hover:bg-accent"
-            >
-              <span className="font-semibold">VND</span>
-              <span className="text-muted-foreground">Công ty chứng khoán VNDirect</span>
-              <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              aria-label="Tài khoản người dùng"
-              className="grid h-8 w-8 place-items-center rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)]"
-            >
-              <User className="h-4 w-4" aria-hidden="true" />
-            </button>
+          <header className="sticky top-0 z-20 flex items-center justify-between gap-2 border-b border-border bg-[var(--color-surface)] px-6 py-2 text-xs">
+            {(() => {
+              const PageIcon = PAGE_TITLES[activeKey].icon;
+              return (
+                <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em]" style={{ color: '#2E256A' }}>
+                  <PageIcon className="h-4 w-4" aria-hidden="true" />
+                  <span>{PAGE_TITLES[activeKey].label}</span>
+                </div>
+              );
+            })()}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Chọn thành viên"
+                aria-haspopup="listbox"
+                className="flex items-center gap-2 rounded-md border border-border px-3 py-1.5 hover:bg-accent"
+              >
+                <span className="font-semibold">VND</span>
+                <span className="text-muted-foreground">Công ty chứng khoán VNDirect</span>
+                <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                aria-label="Tài khoản người dùng"
+                className="grid h-8 w-8 place-items-center rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)]"
+              >
+                <User className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
           </header>
           <main className="min-w-0 flex-1">{children}</main>
         </div>
