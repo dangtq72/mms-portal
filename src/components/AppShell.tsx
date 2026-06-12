@@ -117,7 +117,7 @@ export function AppShell({
         >
           {/* Brand */}
           <Link to="/" className="flex items-center gap-2 px-2 pt-2 pb-2">
-            <img src={vnxLogo.url} alt="VNX" className="h-16 w-auto shrink-0" />
+            <img src={vnxLogo.url} alt="VNX" className="h-10 w-auto shrink-0" />
             <div className="leading-tight">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Vietnam Exchange
