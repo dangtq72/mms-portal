@@ -176,6 +176,12 @@
 }
 
 /* Modern thin scrollbar for sidebar */
+.sidebar-scroll {
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  contain: paint;
+}
 .sidebar-scroll::-webkit-scrollbar {
   width: 5px;
 }
