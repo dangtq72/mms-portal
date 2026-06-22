@@ -149,7 +149,7 @@ export function AppShell({
           </div>
 
           {/* Nav */}
-          <nav className="flex-1 overflow-y-auto px-3 pb-4">
+          <nav className="flex-1 overflow-y-auto px-3 pb-4 sidebar-scroll">
             {/* Favorites */}
             <SectionHeader
               label="Yêu thích"
