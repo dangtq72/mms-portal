@@ -43,7 +43,7 @@ type Section = {
 const FAVORITES: LeafItem[] = [
   { label: "Dashboard", to: "/", icon: LayoutDashboard, matchKey: "dashboard" },
   { label: "Hồ sơ Thành viên", to: "https://admin-art-attach.lovable.app/ho-so", icon: Users },
-  { label: "Báo cáo định kỳ", to: "/cbtt/dinh-ky", icon: FileText },
+  { label: "CBTT định kỳ", to: "/cbtt/dinh-ky", icon: FileText, matchKey: "cbtt" },
   { label: "Giá dịch vụ", to: "/tai-khoan", icon: Receipt },
 ];
 
