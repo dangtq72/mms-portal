@@ -51,7 +51,6 @@ const SECTIONS: Section[] = [
   {
     id: "tong-quan",
     label: "Tổng quan",
-    defaultOpen: true,
     items: [
       { label: "Dashboard", to: "/", icon: LayoutDashboard, matchKey: "dashboard" },
       { label: "Thông báo từ VNX", to: "/thong-bao", icon: BellRing, matchKey: "thong-bao" },
@@ -60,7 +59,6 @@ const SECTIONS: Section[] = [
   {
     id: "ho-so",
     label: "Quản lý hồ sơ",
-    defaultOpen: true,
     items: [
       { label: "Hồ sơ thành viên", to: "https://admin-art-attach.lovable.app/ho-so", icon: Users, matchKey: "ho-so" },
     ],
