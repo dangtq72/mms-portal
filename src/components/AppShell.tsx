@@ -40,6 +40,7 @@ type LeafItem = {
 type Section = {
   id: string;
   label: string;
+  icon: typeof LayoutDashboard;
   items: LeafItem[];
   defaultOpen?: boolean;
 };
@@ -55,6 +56,7 @@ const SECTIONS: Section[] = [
   {
     id: "tong-quan",
     label: "Tổng quan",
+    icon: LayoutDashboard,
     items: [
       { label: "Dashboard", to: "/", icon: LayoutDashboard, matchKey: "dashboard" },
       { label: "Thông báo từ VNX", to: "/thong-bao", icon: BellRing, matchKey: "thong-bao" },
@@ -63,6 +65,7 @@ const SECTIONS: Section[] = [
   {
     id: "ho-so",
     label: "Quản lý hồ sơ",
+    icon: Users,
     items: [
       { label: "Hồ sơ thành viên", to: "https://admin-art-attach.lovable.app/ho-so", icon: Users, matchKey: "ho-so" },
     ],
@@ -70,16 +73,17 @@ const SECTIONS: Section[] = [
   {
     id: "cbtt",
     label: "Công bố thông tin",
+    icon: FileText,
     items: [
       { label: "CBTT định kỳ", to: "/cbtt/dinh-ky", matchKey: "cbtt" },
       { label: "CBTT bất thường", to: "/cbtt/bat-thuong" },
       { label: "CBTT theo yêu cầu", to: "/cbtt/theo-yeu-cau" },
     ],
   },
-  { id: "bao-cao", label: "Báo cáo", items: [{ label: "Báo cáo", to: "/bao-cao", matchKey: "bao-cao" }] },
-  { id: "tai-chinh", label: "Tài chính", items: [{ label: "Giá dịch vụ", to: "/tai-khoan" }] },
-  { id: "van-hanh", label: "Vận hành", items: [{ label: "Tổng quan", to: "/" }] },
-  { id: "quan-tri", label: "Quản trị", items: [{ label: "Tài khoản", to: "/tai-khoan", matchKey: "tai-khoan" }] },
+  { id: "bao-cao", label: "Báo cáo", icon: FolderOpen, items: [{ label: "Báo cáo", to: "/bao-cao", matchKey: "bao-cao" }] },
+  { id: "tai-chinh", label: "Tài chính", icon: Receipt, items: [{ label: "Giá dịch vụ", to: "/tai-khoan" }] },
+  { id: "van-hanh", label: "Vận hành", icon: Settings, items: [{ label: "Tổng quan", to: "/" }] },
+  { id: "quan-tri", label: "Quản trị", icon: UserCog, items: [{ label: "Tài khoản", to: "/tai-khoan", matchKey: "tai-khoan" }] },
 ];
 
 export function AppShell({
