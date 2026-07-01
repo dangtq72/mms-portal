@@ -315,6 +315,25 @@ export function AppShell({
             })}
           </nav>
 
+          {/* Collapse toggle */}
+          <button
+            type="button"
+            onClick={() => setCollapsed((c) => !c)}
+            aria-label={collapsed ? "Mở rộng sidebar" : "Thu gọn sidebar"}
+            aria-pressed={collapsed}
+            title={collapsed ? "Mở rộng sidebar" : "Thu gọn sidebar"}
+            className={`mx-3 mb-2 flex items-center gap-2.5 rounded-md border border-border px-2.5 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground ${collapsed ? "justify-center" : ""}`}
+          >
+            {collapsed ? (
+              <PanelRightOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
+            ) : (
+              <>
+                <PanelLeftClose className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span className="flex-1 text-left">Thu gọn sidebar</span>
+              </>
+            )}
+          </button>
+
           {/* Footer */}
           {!collapsed && (
             <div className="border-t border-border px-4 py-3 text-center text-xs text-muted-foreground">
