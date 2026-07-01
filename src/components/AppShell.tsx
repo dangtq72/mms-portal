@@ -11,7 +11,8 @@ import {
   Receipt,
   BellRing,
   FolderOpen,
-  PanelLeft,
+  PanelLeftClose,
+  PanelRightOpen,
   Settings,
   UserCog,
 } from "lucide-react";
