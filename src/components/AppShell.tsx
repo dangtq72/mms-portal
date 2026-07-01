@@ -11,7 +11,8 @@ import {
   Receipt,
   BellRing,
   FolderOpen,
-  PanelLeft,
+  PanelLeftClose,
+  PanelRightOpen,
   Settings,
   UserCog,
 } from "lucide-react";
@@ -314,6 +315,25 @@ export function AppShell({
             })}
           </nav>
 
+          {/* Collapse toggle */}
+          <button
+            type="button"
+            onClick={() => setCollapsed((c) => !c)}
+            aria-label={collapsed ? "Mở rộng sidebar" : "Thu gọn sidebar"}
+            aria-pressed={collapsed}
+            title={collapsed ? "Mở rộng sidebar" : "Thu gọn sidebar"}
+            className={`mx-3 mb-2 flex items-center gap-2.5 rounded-md border border-border px-2.5 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground ${collapsed ? "justify-center" : ""}`}
+          >
+            {collapsed ? (
+              <PanelRightOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
+            ) : (
+              <>
+                <PanelLeftClose className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span className="flex-1 text-left">Thu gọn sidebar</span>
+              </>
+            )}
+          </button>
+
           {/* Footer */}
           {!collapsed && (
             <div className="border-t border-border px-4 py-3 text-center text-xs text-muted-foreground">
@@ -325,15 +345,6 @@ export function AppShell({
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="sticky top-0 z-20 flex items-center justify-between gap-2 border-b border-border bg-[var(--color-surface)] px-6 py-2 text-xs">
             <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setCollapsed((c) => !c)}
-                aria-label={collapsed ? "Mở rộng sidebar" : "Thu gọn sidebar"}
-                aria-pressed={collapsed}
-                className="grid h-8 w-8 place-items-center rounded-md text-foreground hover:bg-accent"
-              >
-                <PanelLeft className="h-4 w-4" aria-hidden="true" />
-              </button>
               {(() => {
                 const PageIcon = PAGE_TITLES[activeKey].icon;
                 return (
