@@ -11,9 +11,13 @@ import {
   Receipt,
   BellRing,
   FolderOpen,
+  PanelLeft,
+  Settings,
+  UserCog,
 } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 import vnxLogo from "@/assets/vnx-logo-new.png.asset.json";
+
 
 export type NavKey = "dashboard" | "ho-so" | "cbtt" | "bao-cao" | "thong-bao" | "tai-khoan";
 
