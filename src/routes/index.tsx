@@ -359,7 +359,8 @@ function Dashboard() {
                                 <Link
                                   to="/cbtt/dinh-ky/moi"
                                   aria-label={`${it.action} cho ${it.title}`}
-                                  className="min-w-24 rounded-md bg-[var(--color-brand)] px-3 py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90 inline-flex items-center justify-center"
+                                  style={{ background: "var(--color-cta-gradient)" }}
+                                  className="min-w-24 rounded-md px-3 py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90 inline-flex items-center justify-center"
                                 >
                                   {it.action}
                                 </Link>
@@ -367,7 +368,8 @@ function Dashboard() {
                                 <button
                                   type="button"
                                   aria-label={`${it.action} cho ${it.title}`}
-                                  className="min-w-24 rounded-md bg-[var(--color-brand)] px-3 py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90"
+                                  style={{ background: "var(--color-cta-gradient)" }}
+                                  className="min-w-24 rounded-md px-3 py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90"
                                 >
                                   {it.action}
                                 </button>
@@ -416,7 +418,8 @@ function Dashboard() {
                     <Link
                       to="/cbtt/dinh-ky/moi"
                       aria-label={`${u.action}: ${u.title}`}
-                      className="w-20 shrink-0 rounded-md bg-[var(--color-brand)] py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90 inline-flex items-center justify-center"
+                      style={{ background: "var(--color-cta-gradient)" }}
+                      className="w-20 shrink-0 rounded-md py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90 inline-flex items-center justify-center"
                     >
                       {u.action}
                     </Link>
@@ -424,7 +427,8 @@ function Dashboard() {
                     <button
                       type="button"
                       aria-label={`${u.action}: ${u.title}`}
-                      className="w-20 shrink-0 rounded-md bg-[var(--color-brand)] py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90"
+                      style={{ background: "var(--color-cta-gradient)" }}
+                      className="w-20 shrink-0 rounded-md py-1 text-[12px] font-medium text-white shadow-sm transition hover:opacity-90"
                     >
                       {u.action}
                     </button>
