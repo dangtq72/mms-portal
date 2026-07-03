@@ -444,13 +444,18 @@ function Dashboard() {
         <section className="rounded-xl border border-border bg-[var(--color-surface)] p-5 shadow-sm">
           <div className="mb-1 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <Bell className="h-[20px] w-[20px] text-[var(--color-brand)]" />
+              <div className="relative inline-flex">
+                <Bell className="h-[20px] w-[20px] text-[var(--color-brand)]" />
+                {unreadCount > 0 && (
+                  <span
+                    aria-label={`${unreadCount} thông báo chưa đọc`}
+                    className="absolute -right-1.5 -top-1.5 grid min-h-[18px] min-w-[18px] place-items-center rounded-full bg-[var(--color-danger)] px-1 text-[10px] font-semibold leading-none text-white shadow-sm ring-2 ring-[var(--color-surface)]"
+                  >
+                    {unreadCount > 99 ? "99+" : unreadCount}
+                  </span>
+                )}
+              </div>
               <h3 className="font-semibold text-xl">Thông báo từ VNX</h3>
-              {unreadCount > 0 && (
-                <span className="inline-flex items-center rounded-full bg-[#fbeaea] px-2 py-0.5 text-xs font-medium text-[#de3b3d]">
-                  {unreadCount} chưa đọc
-                </span>
-              )}
             </div>
             <button
               type="button"
