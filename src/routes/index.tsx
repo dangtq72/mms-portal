@@ -51,11 +51,11 @@ const stats: {
   desc: string;
   tone: Tone;
 }[] = [
+  { key: "late", label: "CHẬM NỘP", value: 1, desc: "Đã quá hạn nộp tính đến ngày hiện tại.", tone: "danger" },
   { key: "due", label: "ĐẾN HẠN", value: 4, desc: "Báo cáo, tin công bố cần nộp trong ngày hôm nay.", tone: "danger" },
   { key: "soon", label: "SẮP ĐẾN HẠN", value: 7, desc: "Sẽ đến hạn nộp trong 7 ngày tới.", tone: "warning" },
-  { key: "waiting", label: "CHỜ VNX DUYỆT", value: 3, desc: "Đã gửi lên VNX, đang chờ phê duyệt.", tone: "info" },
   { key: "rejected", label: "BỊ TRẢ LẠI", value: 2, desc: "Bị VNX từ chối, cần đính chính lại.", tone: "purple" },
-  { key: "late", label: "CHẬM NỘP", value: 1, desc: "Đã quá hạn nộp tính đến ngày hiện tại.", tone: "danger" },
+  { key: "waiting", label: "CHỜ VNX DUYỆT", value: 3, desc: "Đã gửi lên VNX, đang chờ phê duyệt.", tone: "info" },
   { key: "approved", label: "MỚI PHÊ DUYỆT", value: 5, desc: "Mới được VNX phê duyệt gần đây.", tone: "success" },
 ];
 
