@@ -445,11 +445,11 @@ function Dashboard() {
           <div className="mb-1 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <div className="relative inline-flex">
-                <Bell className="h-[20px] w-[20px] text-[var(--color-brand)]" />
+                <Bell className="h-6 w-6 text-[var(--color-brand)]" />
                 {unreadCount > 0 && (
                   <span
                     aria-label={`${unreadCount} thông báo chưa đọc`}
-                    className="absolute -right-1.5 -top-1.5 grid min-h-[18px] min-w-[18px] place-items-center rounded-full bg-[var(--color-danger)] px-1 text-[10px] font-semibold leading-none text-white shadow-sm ring-2 ring-[var(--color-surface)]"
+                    className="absolute -right-1 -top-1 grid min-h-[14px] min-w-[14px] place-items-center rounded-full bg-[var(--color-danger)] px-1 text-[9px] font-semibold leading-none text-white shadow-sm ring-2 ring-[var(--color-surface)]"
                   >
                     {unreadCount > 99 ? "99+" : unreadCount}
                   </span>
