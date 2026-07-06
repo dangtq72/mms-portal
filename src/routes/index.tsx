@@ -31,11 +31,12 @@ export const Route = createFileRoute("/")({
   component: Dashboard,
 });
 
-type Tone = "info" | "warning" | "purple" | "danger" | "success" | "brand";
+type Tone = "info" | "warning" | "purple" | "danger" | "success" | "brand" | "orange";
 
 const toneMap: Record<Tone, { bar: string; text: string; bg: string }> = {
   info: { bar: "bg-[var(--color-info)]", text: "text-[var(--color-info)]", bg: "bg-[var(--color-info)]/10" },
   warning: { bar: "bg-[var(--color-warning)]", text: "text-[var(--color-warning)]", bg: "bg-[var(--color-warning)]/10" },
+  orange: { bar: "bg-[var(--color-orange)]", text: "text-[var(--color-orange)]", bg: "bg-[var(--color-orange)]/10" },
   purple: { bar: "bg-[var(--color-purple)]", text: "text-[var(--color-purple)] text-[#de3b3d]", bg: "bg-[var(--color-purple)]/10 bg-[#fbeaea]" },
   danger: { bar: "bg-[var(--color-danger)]", text: "text-[var(--color-danger)]", bg: "bg-[var(--color-danger)]/10" },
   success: { bar: "bg-[var(--color-success)]", text: "text-[var(--color-success)]", bg: "bg-[var(--color-success)]/10" },
@@ -52,7 +53,7 @@ const stats: {
   tone: Tone;
 }[] = [
   { key: "late", label: "CHẬM NỘP", value: 1, desc: "Đã quá hạn nộp tính đến ngày hiện tại.", tone: "danger" },
-  { key: "due", label: "ĐẾN HẠN", value: 4, desc: "Báo cáo, tin công bố cần nộp trong ngày hôm nay.", tone: "danger" },
+  { key: "due", label: "ĐẾN HẠN", value: 4, desc: "Báo cáo, tin công bố cần nộp trong ngày hôm nay.", tone: "orange" },
   { key: "soon", label: "SẮP ĐẾN HẠN", value: 7, desc: "Sẽ đến hạn nộp trong 7 ngày tới.", tone: "warning" },
   { key: "rejected", label: "BỊ TRẢ LẠI", value: 2, desc: "Bị VNX từ chối, cần đính chính lại.", tone: "purple" },
   { key: "waiting", label: "CHỜ VNX DUYỆT", value: 3, desc: "Đã gửi lên VNX, đang chờ phê duyệt.", tone: "info" },
@@ -73,7 +74,7 @@ const statDetails: Record<
   due: {
     heading: "Đến hạn nộp hôm nay",
     desc: "Báo cáo & tin công bố cần nộp trong ngày hôm nay.",
-    tone: "danger",
+    tone: "orange",
     items: [
       { type: "Báo cáo", title: "Báo cáo định kỳ Q1/2026", sub: "Loại: Báo cáo định kỳ", action: "Nộp báo cáo" },
       { type: "CBTT", title: "CBTT định kỳ - Báo cáo tài chính kiểm toán", sub: "Loại: CBTT định kỳ", action: "Gửi CBTT" },
