@@ -447,7 +447,7 @@ export function BalanceSheetDialog({
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Hủy
           </Button>
-          <Button onClick={handleSave}>Lưu</Button>
+          <Button className="text-white hover:opacity-90" style={{ background: "var(--color-cta-gradient)" }} onClick={handleSave}>Lưu</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
