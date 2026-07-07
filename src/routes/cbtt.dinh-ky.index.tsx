@@ -87,7 +87,11 @@ function CbttListPage() {
             </p>
             <h1 className="text-xl font-semibold">CBTT định kỳ</h1>
           </div>
-          <Button onClick={() => navigate({ to: "/cbtt/dinh-ky/moi" })}>
+          <Button
+            className="text-white hover:opacity-90"
+            style={{ background: "var(--color-cta-gradient)" }}
+            onClick={() => navigate({ to: "/cbtt/dinh-ky/moi" })}
+          >
             <Plus className="mr-1 h-4 w-4" /> Thêm mới
           </Button>
         </div>

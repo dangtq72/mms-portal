@@ -361,7 +361,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
         <Button variant="secondary" onClick={() => submit("Nháp")}>
           Lưu nháp
         </Button>
-        <Button onClick={() => submit("Chờ duyệt")}>Gửi duyệt</Button>
+        <Button className="text-white hover:opacity-90" style={{ background: "var(--color-cta-gradient)" }} onClick={() => submit("Chờ duyệt")}>Gửi duyệt</Button>
       </div>
     </div>
   );
