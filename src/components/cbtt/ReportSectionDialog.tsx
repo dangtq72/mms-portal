@@ -47,6 +47,8 @@ export function ReportSectionDialog({
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>Hủy</Button>
           <Button
+            className="text-white hover:opacity-90"
+            style={{ background: "var(--color-cta-gradient)" }}
             onClick={() => {
               onSave(content);
               onOpenChange(false);
