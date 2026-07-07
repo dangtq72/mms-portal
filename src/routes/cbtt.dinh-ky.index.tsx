@@ -140,7 +140,7 @@ function CbttListPage() {
                 {filtered.length === 0 && (
                   <TableRow>
                     <TableCell colSpan={7} className="py-10 text-center text-sm text-muted-foreground">
-                      Chưa có dữ liệu. Bấm "Thêm mới" để tạo tin công bố đầu tiên.
+                      Chưa có dữ liệu. Bấm "Tạo tin" để tạo tin công bố đầu tiên.
                     </TableCell>
                   </TableRow>
                 )}
