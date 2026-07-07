@@ -92,7 +92,7 @@ function CbttListPage() {
             style={{ background: "var(--color-cta-gradient)" }}
             onClick={() => navigate({ to: "/cbtt/dinh-ky/moi" })}
           >
-            <Plus className="mr-1 h-4 w-4" /> Thêm mới
+            <Plus className="mr-1 h-4 w-4" /> Tạo tin
           </Button>
         </div>
 
