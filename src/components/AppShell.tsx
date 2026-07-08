@@ -78,7 +78,7 @@ const SECTIONS: Section[] = [
     items: [
       { label: "CBTT định kỳ", to: "/cbtt/dinh-ky", matchKey: "cbtt" },
       { label: "CBTT bất thường", to: "/cbtt/bat-thuong" },
-      { label: "CBTT theo yêu cầu", to: "/cbtt/theo-yeu-cau" },
+      { label: "Tin công bố của TV (admin)", to: "/cbtt/theo-yeu-cau" },
     ],
   },
   { id: "bao-cao", label: "Báo cáo", icon: FolderOpen, items: [{ label: "Báo cáo", to: "/bao-cao", matchKey: "bao-cao" }] },
