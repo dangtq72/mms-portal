@@ -174,7 +174,7 @@ function DocGroupCard({ group }: { group: DocGroup }) {
           {group.langs.map((row, i) => (
             <div
               key={i}
-              className="grid grid-cols-[auto_1fr_auto_auto_auto] items-center gap-4 px-4 py-3 text-sm"
+              className="grid grid-cols-[auto_1fr_100px_150px_auto] items-center gap-4 px-4 py-3 text-sm"
             >
               <LangPill lang={row.lang} />
               <span
@@ -187,10 +187,12 @@ function DocGroupCard({ group }: { group: DocGroup }) {
               >
                 {row.title}
               </span>
-              <span className="w-24 text-right text-xs text-muted-foreground">
+              <span className="text-right text-xs text-muted-foreground">
                 {row.date ?? "—"}
               </span>
-              <StatusBadge status={row.status} />
+              <div className="flex justify-start">
+                <StatusBadge status={row.status} />
+              </div>
               <div className="flex items-center gap-3 pl-2">
                 {actionsFor(row).map((a) => (
                   <button
