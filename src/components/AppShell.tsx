@@ -25,7 +25,7 @@ export type NavKey = "dashboard" | "ho-so" | "cbtt" | "bao-cao" | "thong-bao" | 
 const PAGE_TITLES: Record<NavKey, { label: string; icon: typeof LayoutDashboard }> = {
   dashboard: { label: "DASHBOARD", icon: LayoutDashboard },
   "ho-so": { label: "HỒ SƠ THÀNH VIÊN", icon: Users },
-  cbtt: { label: "CÔNG BỐ THÔNG TIN", icon: FileText },
+  cbtt: { label: "TIN CÔNG BỐ CỦA THÀNH VIÊN", icon: FileText },
   "bao-cao": { label: "BÁO CÁO", icon: FolderOpen },
   "thong-bao": { label: "THÔNG BÁO TỪ VNX", icon: BellRing },
   "tai-khoan": { label: "TÀI KHOẢN", icon: Receipt },
