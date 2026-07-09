@@ -207,7 +207,7 @@ function DocGroupCard({ group }: { group: DocGroup }) {
                   <button
                     key={a.label}
                     className={cn(
-                      "text-xs font-medium hover:underline",
+                      "text-xs font-bold hover:underline",
                       a.tone === "danger"
                         ? "text-destructive"
                         : a.tone === "primary"
