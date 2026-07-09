@@ -98,13 +98,13 @@ const GROUPS: DocGroup[] = [
 
 const STATUS_STYLES: Record<Status, string> = {
   "Đã công bố":
-    "bg-[oklch(0.95_0.05_150)] text-[oklch(0.42_0.13_150)] ring-[oklch(0.85_0.09_150)]",
+    "bg-[oklch(0.95_0.05_150)] text-[oklch(0.42_0.13_150)]",
   "Chờ dịch":
-    "bg-[oklch(0.96_0.06_75)] text-[oklch(0.48_0.14_60)] ring-[oklch(0.85_0.11_70)]",
+    "bg-[oklch(0.96_0.06_75)] text-[oklch(0.48_0.14_60)]",
   "Chờ duyệt":
-    "bg-[oklch(0.95_0.05_250)] text-[oklch(0.44_0.15_255)] ring-[oklch(0.85_0.10_255)]",
+    "bg-[oklch(0.95_0.05_250)] text-[oklch(0.44_0.15_255)]",
   "Từ chối duyệt":
-    "bg-[oklch(0.96_0.04_25)] text-[oklch(0.48_0.18_28)] ring-[oklch(0.85_0.13_28)]",
+    "bg-[oklch(0.96_0.04_25)] text-[oklch(0.48_0.18_28)]",
 };
 
 const STATUS_DOT: Record<Status, string> = {
@@ -118,7 +118,7 @@ function StatusBadge({ status }: { status: Status }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset",
+        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium",
         STATUS_STYLES[status],
       )}
     >
