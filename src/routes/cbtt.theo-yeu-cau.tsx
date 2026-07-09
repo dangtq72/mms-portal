@@ -181,9 +181,11 @@ function DocGroupCard({ group }: { group: DocGroup }) {
           {group.langs.map((row, i) => (
             <div
               key={i}
-              className="grid grid-cols-[auto_1fr_100px_150px_auto] items-center gap-4 px-4 py-3 text-sm"
+              className="grid grid-cols-[40px_1fr_100px_150px_140px] items-center gap-4 px-4 py-3 text-sm"
             >
-              <LangPill lang={row.lang} />
+              <div className="flex justify-center">
+                <LangPill lang={row.lang} />
+              </div>
               <span
                 className={cn(
                   "truncate",
@@ -197,10 +199,10 @@ function DocGroupCard({ group }: { group: DocGroup }) {
               <span className="text-right text-xs text-muted-foreground">
                 {row.date ?? "—"}
               </span>
-              <div className="flex justify-start">
+              <div className="flex items-center justify-start">
                 <StatusBadge status={row.status} />
               </div>
-              <div className="flex items-center gap-3 pl-2">
+              <div className="flex items-center justify-end gap-3">
                 {actionsFor(row).map((a) => (
                   <button
                     key={a.label}
