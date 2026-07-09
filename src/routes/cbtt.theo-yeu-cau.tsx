@@ -129,8 +129,15 @@ function StatusBadge({ status }: { status: Status }) {
 }
 
 function LangPill({ lang }: { lang: Lang }) {
+  const isVi = lang === "VI";
   return (
-    <span className="inline-flex h-6 w-9 items-center justify-center rounded-md bg-muted text-[11px] font-semibold tracking-wide text-muted-foreground">
+    <span
+      className="inline-flex h-6 w-9 items-center justify-center rounded-md text-[11px] font-semibold tracking-wide"
+      style={{
+        backgroundColor: isVi ? "#e9eefb" : "#f3f0ea",
+        color: isVi ? "#1e40af" : "#7a6a48",
+      }}
+    >
       {lang}
     </span>
   );
