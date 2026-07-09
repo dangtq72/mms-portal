@@ -148,8 +148,8 @@ function actionsFor(row: LangRow): { label: string; tone?: "danger" | "primary" 
   if (row.status === "Chờ dịch") acts.push({ label: "Dịch", tone: "primary" });
   if (row.status === "Chờ duyệt") acts.push({ label: "Sửa" });
   if (row.status === "Từ chối duyệt") {
-    acts.push({ label: "Sửa" });
     acts.push({ label: "Xóa", tone: "danger" });
+    acts.push({ label: "Sửa" });
   }
   acts.push({ label: "Xem" });
   return acts;
