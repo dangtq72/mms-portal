@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ChevronDown, ChevronRight, Search } from "lucide-react";
+import { AlertTriangle, ChevronDown, ChevronRight, Search } from "lucide-react";
 
 import { AppShell } from "@/components/AppShell";
 import { Input } from "@/components/ui/input";
