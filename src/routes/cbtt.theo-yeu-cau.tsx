@@ -165,7 +165,13 @@ function actionsFor(row: LangRow): { label: string; tone?: "danger" | "primary" 
   return acts;
 }
 
-function DocGroupCard({ group }: { group: DocGroup }) {
+function DocGroupCard({
+  group,
+  onRequestDelete,
+}: {
+  group: DocGroup;
+  onRequestDelete: (groupId: string, lang: Lang) => void;
+}) {
   const [open, setOpen] = useState(true);
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-[var(--color-surface)] shadow-sm">
@@ -216,6 +222,11 @@ function DocGroupCard({ group }: { group: DocGroup }) {
                 {actionsFor(row).map((a) => (
                   <button
                     key={a.label}
+                    onClick={() => {
+                      if (a.label === "Xóa") {
+                        onRequestDelete(group.id, row.lang);
+                      }
+                    }}
                     className={cn(
                       "text-xs font-bold hover:underline",
                       a.tone === "danger"
