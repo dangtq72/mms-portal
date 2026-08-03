@@ -253,14 +253,16 @@ function TheoYeuCauPage() {
   const [memberCode, setMemberCode] = useState<string>("ALL");
   const [status, setStatus] = useState<string>("ALL");
   const [lang, setLang] = useState<string>("ALL");
+  const [groups, setGroups] = useState<DocGroup[]>(GROUPS);
+  const [pendingDelete, setPendingDelete] = useState<{ groupId: string; lang: Lang } | null>(null);
 
   const memberCodes = useMemo(
-    () => Array.from(new Set(GROUPS.map((g) => g.memberCode))),
-    [],
+    () => Array.from(new Set(groups.map((g) => g.memberCode))),
+    [groups],
   );
 
   const filtered = useMemo(() => {
-    return GROUPS.map((g) => {
+    return groups.map((g) => {
       const langs = g.langs.filter((row) => {
         if (status !== "ALL" && row.status !== status) return false;
         if (lang !== "ALL" && row.lang !== lang) return false;
@@ -272,7 +274,20 @@ function TheoYeuCauPage() {
       if (q && !g.title.toLowerCase().includes(q.toLowerCase())) return false;
       return g.langs.length > 0;
     });
-  }, [q, memberCode, status, lang]);
+  }, [q, memberCode, status, lang, groups]);
+
+  const handleConfirmDelete = () => {
+    if (!pendingDelete) return;
+    const { groupId, lang } = pendingDelete;
+    setGroups((prev) =>
+      prev
+        .map((g) =>
+          g.id === groupId ? { ...g, langs: g.langs.filter((row) => row.lang !== lang) } : g,
+        )
+        .filter((g) => g.langs.length > 0),
+    );
+    setPendingDelete(null);
+  };
 
   return (
     <AppShell activeKey="cbtt">
@@ -362,13 +377,17 @@ function TheoYeuCauPage() {
                 </div>
               )}
               {filtered.map((g) => (
-                <DocGroupCard key={g.id} group={g} />
+                <DocGroupCard
+                  key={g.id}
+                  group={g}
+                  onRequestDelete={(groupId, lang) => setPendingDelete({ groupId, lang })}
+                />
               ))}
             </div>
 
             {/* Pagination */}
             <div className="flex items-center justify-between pt-1 text-xs text-muted-foreground">
-              <span>1–{filtered.length} trên {GROUPS.length} tin</span>
+              <span>1–{filtered.length} trên {groups.length} tin</span>
               <div className="flex items-center gap-1">
                 <Button variant="outline" size="sm" className="h-8 px-3">
                   Trước
@@ -396,6 +415,31 @@ function TheoYeuCauPage() {
             </div>
           </TabsContent>
         </Tabs>
+
+        {/* Delete confirmation */}
+        <AlertDialog
+          open={!!pendingDelete}
+          onOpenChange={(open) => !open && setPendingDelete(null)}
+        >
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Xác nhận xóa</AlertDialogTitle>
+              <AlertDialogDescription>
+                Bạn có chắc chắn muốn xóa bản ghi này? Thao tác xóa không thể hoàn tác.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={() => setPendingDelete(null)}>Hủy</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleConfirmDelete}
+                className="text-white"
+                style={{ background: "var(--color-cta-gradient)" }}
+              >
+                Xóa
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </main>
     </AppShell>
   );
