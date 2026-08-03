@@ -423,11 +423,14 @@ function TheoYeuCauPage() {
         >
           <AlertDialogContent>
             <AlertDialogHeader>
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-destructive/10 sm:mx-0">
-                <AlertTriangle className="h-6 w-6 text-destructive" />
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-destructive/10">
+                  <AlertTriangle className="h-5 w-5 text-destructive" />
+                </div>
+                <AlertDialogTitle className="mt-0">Xác nhận xóa</AlertDialogTitle>
               </div>
-              <AlertDialogTitle>Xác nhận xóa</AlertDialogTitle>
               <AlertDialogDescription>
+
                 Bạn có chắc chắn muốn xóa bản ghi này? Thao tác xóa không thể hoàn tác.
               </AlertDialogDescription>
             </AlertDialogHeader>
