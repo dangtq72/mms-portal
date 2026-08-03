@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ChevronDown, ChevronRight, Search } from "lucide-react";
+import { AlertTriangle, ChevronDown, ChevronRight, Search } from "lucide-react";
 
 import { AppShell } from "@/components/AppShell";
 import { Input } from "@/components/ui/input";
@@ -423,6 +423,9 @@ function TheoYeuCauPage() {
         >
           <AlertDialogContent>
             <AlertDialogHeader>
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-destructive/10 sm:mx-0">
+                <AlertTriangle className="h-6 w-6 text-destructive" />
+              </div>
               <AlertDialogTitle>Xác nhận xóa</AlertDialogTitle>
               <AlertDialogDescription>
                 Bạn có chắc chắn muốn xóa bản ghi này? Thao tác xóa không thể hoàn tác.
