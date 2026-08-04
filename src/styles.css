@@ -156,6 +156,33 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* Alert dialog drop-in animation (replaces default center zoom) */
+@keyframes alert-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -58%) scale(0.92);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -49.5%) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes alert-pop-out {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -55%) scale(0.95);
+  }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
