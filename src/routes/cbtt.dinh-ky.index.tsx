@@ -64,6 +64,7 @@ function CbttListPage() {
   const [items, setItems] = useState<CbttReport[]>([]);
   const [q, setQ] = useState("");
   const [status, setStatus] = useState<Status | "ALL">("ALL");
+  const [page, setPage] = useState(1);
   const [pendingDelete, setPendingDelete] = useState<CbttReport | null>(null);
 
   const refresh = () => setItems(listReports());
@@ -76,6 +77,18 @@ function CbttListPage() {
       return true;
     });
   }, [items, q, status]);
+
+  const pageSize = 10;
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const safePage = Math.min(page, totalPages);
+  const paginated = useMemo(() => {
+    const start = (safePage - 1) * pageSize;
+    return filtered.slice(start, start + pageSize);
+  }, [filtered, safePage]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [q, status]);
 
   const onConfirmDelete = () => {
     if (!pendingDelete) return;
