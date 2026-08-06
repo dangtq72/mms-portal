@@ -128,7 +128,7 @@ function StatusBadge({ status }: { status: Status }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center justify-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium w-[110px] whitespace-nowrap",
         STATUS_STYLES[status],
       )}
     >
