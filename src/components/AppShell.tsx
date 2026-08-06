@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Users,
   FileText,
+  Megaphone,
   Receipt,
   BellRing,
   FolderOpen,
