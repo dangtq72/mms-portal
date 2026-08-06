@@ -24,6 +24,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -56,6 +64,7 @@ function CbttListPage() {
   const [items, setItems] = useState<CbttReport[]>([]);
   const [q, setQ] = useState("");
   const [status, setStatus] = useState<Status | "ALL">("ALL");
+  const [page, setPage] = useState(1);
   const [pendingDelete, setPendingDelete] = useState<CbttReport | null>(null);
 
   const refresh = () => setItems(listReports());
@@ -68,6 +77,18 @@ function CbttListPage() {
       return true;
     });
   }, [items, q, status]);
+
+  const pageSize = 10;
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const safePage = Math.min(page, totalPages);
+  const paginated = useMemo(() => {
+    const start = (safePage - 1) * pageSize;
+    return filtered.slice(start, start + pageSize);
+  }, [filtered, safePage]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [q, status]);
 
   const onConfirmDelete = () => {
     if (!pendingDelete) return;
@@ -113,10 +134,6 @@ function CbttListPage() {
         </div>
 
         <div className="rounded-xl border border-border bg-[var(--color-surface)] p-4 shadow-sm">
-          <div className="mb-2 text-right text-xs text-muted-foreground">
-            {filtered.length} bản ghi
-          </div>
-
           <div className="overflow-hidden rounded-lg border border-border">
             <Table>
               <TableHeader>
@@ -131,16 +148,16 @@ function CbttListPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filtered.length === 0 && (
+                {paginated.length === 0 && (
                   <TableRow>
                     <TableCell colSpan={7} className="py-10 text-center text-sm text-muted-foreground">
                       Chưa có dữ liệu. Bấm "Tạo tin" để tạo tin công bố đầu tiên.
                     </TableCell>
                   </TableRow>
                 )}
-                {filtered.map((r, idx) => (
+                {paginated.map((r, idx) => (
                   <TableRow key={r.id}>
-                    <TableCell>{idx + 1}</TableCell>
+                    <TableCell>{(safePage - 1) * pageSize + idx + 1}</TableCell>
                     <TableCell className="font-medium">
                       <Link
                         to="/cbtt/dinh-ky/$id"
@@ -195,6 +212,41 @@ function CbttListPage() {
                 ))}
               </TableBody>
             </Table>
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+            <span className="text-xs text-muted-foreground">
+              Hiển thị {filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1} -{" "}
+              {Math.min(safePage * pageSize, filtered.length)} / {filtered.length} bản ghi
+            </span>
+            {totalPages > 1 && (
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      className={safePage <= 1 ? "pointer-events-none opacity-50" : ""}
+                    />
+                  </PaginationItem>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <PaginationItem key={p}>
+                      <PaginationLink
+                        isActive={p === safePage}
+                        onClick={() => setPage(p)}
+                      >
+                        {p}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                      className={safePage >= totalPages ? "pointer-events-none opacity-50" : ""}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            )}
           </div>
         </div>
       </main>
