@@ -80,18 +80,8 @@ function CbttListPage() {
   return (
     <AppShell activeKey="cbtt">
       <main className="mx-auto max-w-7xl space-y-5 px-6 py-6">
-        <div className="flex flex-wrap items-center justify-end gap-3">
-          <Button
-            className="text-white hover:opacity-90"
-            style={{ background: "var(--color-cta-gradient)" }}
-            onClick={() => navigate({ to: "/cbtt/dinh-ky/moi" })}
-          >
-            <Plus className="mr-1 h-4 w-4" /> Tạo tin
-          </Button>
-        </div>
-
-        <div className="rounded-xl border border-border bg-[var(--color-surface)] p-4 shadow-sm">
-          <div className="mb-3 flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
@@ -112,9 +102,19 @@ function CbttListPage() {
                 <SelectItem value="Đã duyệt">Đã duyệt</SelectItem>
               </SelectContent>
             </Select>
-            <span className="ml-auto text-xs text-muted-foreground">
-              {filtered.length} bản ghi
-            </span>
+          </div>
+          <Button
+            className="text-white hover:opacity-90"
+            style={{ background: "var(--color-cta-gradient)" }}
+            onClick={() => navigate({ to: "/cbtt/dinh-ky/moi" })}
+          >
+            <Plus className="mr-1 h-4 w-4" /> Tạo tin
+          </Button>
+        </div>
+
+        <div className="rounded-xl border border-border bg-[var(--color-surface)] p-4 shadow-sm">
+          <div className="mb-2 text-right text-xs text-muted-foreground">
+            {filtered.length} bản ghi
           </div>
 
           <div className="overflow-hidden rounded-lg border border-border">
