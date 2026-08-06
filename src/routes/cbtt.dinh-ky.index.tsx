@@ -80,13 +80,7 @@ function CbttListPage() {
   return (
     <AppShell activeKey="cbtt">
       <main className="mx-auto max-w-7xl space-y-5 px-6 py-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Công bố thông tin
-            </p>
-            <h1 className="text-xl font-semibold">CBTT định kỳ</h1>
-          </div>
+        <div className="flex flex-wrap items-center justify-end gap-3">
           <Button
             className="text-white hover:opacity-90"
             style={{ background: "var(--color-cta-gradient)" }}
