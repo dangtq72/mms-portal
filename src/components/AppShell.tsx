@@ -157,7 +157,7 @@ export function AppShell({
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Tìm menu (Ctrl+/ )"
-                  className="h-9 w-full rounded-md border border-border bg-background pl-8 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/30"
+                  className="h-9 w-full rounded-md border border-input bg-background pl-8 pr-3 text-sm placeholder:text-muted-foreground transition-colors hover:border-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
                 />
               </div>
             </div>
