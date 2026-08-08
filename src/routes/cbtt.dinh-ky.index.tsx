@@ -41,7 +41,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { CbttReport, Status, deleteReport, listReports } from "@/lib/cbtt-store";
+import { ALL_STATUSES, CbttReport, Status, deleteReport, listReports } from "@/lib/cbtt-store";
 
 export const Route = createFileRoute("/cbtt/dinh-ky/")({
   head: () => ({
@@ -56,6 +56,9 @@ export const Route = createFileRoute("/cbtt/dinh-ky/")({
 const STATUS_TONE: Record<Status, string> = {
   "Nháp": "bg-muted text-foreground",
   "Chờ kiểm tra": "bg-[var(--color-warning)]/15 text-[var(--color-warning)]",
+  "Chờ VNX duyệt": "bg-[var(--color-brand)]/12 text-[var(--color-brand)]",
+  "Chuyên viên từ chối": "bg-destructive/12 text-destructive",
+  "VNX từ chối": "bg-destructive/12 text-destructive",
   "Đã công bố": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
 };
 
@@ -118,9 +121,9 @@ function CbttListPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">Tất cả trạng thái</SelectItem>
-                <SelectItem value="Nháp">Nháp</SelectItem>
-                <SelectItem value="Chờ kiểm tra">Chờ kiểm tra</SelectItem>
-                <SelectItem value="Đã công bố">Đã công bố</SelectItem>
+                {ALL_STATUSES.map((s) => (
+                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
