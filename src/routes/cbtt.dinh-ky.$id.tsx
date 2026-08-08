@@ -23,6 +23,9 @@ export const Route = createFileRoute("/cbtt/dinh-ky/$id")({
 const STATUS_TONE: Record<Status, string> = {
   "Nháp": "bg-muted text-foreground",
   "Chờ kiểm tra": "bg-[var(--color-warning)]/15 text-[var(--color-warning)]",
+  "Chờ VNX duyệt": "bg-[var(--color-brand)]/12 text-[var(--color-brand)]",
+  "Chuyên viên từ chối": "bg-destructive/12 text-destructive",
+  "VNX từ chối": "bg-destructive/12 text-destructive",
   "Đã công bố": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
 };
 
