@@ -120,7 +120,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
     return null;
   };
 
-  const buildPayload = (status: "Nháp" | "Chờ duyệt") => ({
+  const buildPayload = (status: "Nháp" | "Chờ duyệt" | "Đã công bố") => ({
     period: form.period as Period,
     newsType: form.newsType,
     title: form.title.trim(),
