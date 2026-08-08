@@ -133,9 +133,8 @@ function CbttListPage() {
           </Button>
         </div>
 
-        <div className="rounded-xl border border-border bg-[var(--color-surface)] p-4 shadow-sm">
-          <div className="overflow-hidden rounded-lg border border-border">
-            <Table>
+        <div className="bg-[var(--color-surface)]">
+          <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-12">STT</TableHead>
@@ -212,7 +211,6 @@ function CbttListPage() {
                 ))}
               </TableBody>
             </Table>
-          </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <span className="text-xs text-muted-foreground">
