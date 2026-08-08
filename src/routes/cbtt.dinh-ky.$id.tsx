@@ -23,7 +23,7 @@ export const Route = createFileRoute("/cbtt/dinh-ky/$id")({
 const STATUS_TONE: Record<Status, string> = {
   "Nháp": "bg-muted text-foreground",
   "Chờ duyệt": "bg-[var(--color-warning)]/15 text-[var(--color-warning)]",
-  "Đã duyệt": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
+  "Đã công bố": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
 };
 
 function Field({ label, value }: { label: string; value: React.ReactNode }) {

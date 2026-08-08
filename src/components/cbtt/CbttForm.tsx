@@ -120,7 +120,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
     return null;
   };
 
-  const buildPayload = (status: "Nháp" | "Chờ duyệt") => ({
+  const buildPayload = (status: "Nháp" | "Chờ duyệt" | "Đã công bố") => ({
     period: form.period as Period,
     newsType: form.newsType,
     title: form.title.trim(),
@@ -132,7 +132,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
     status,
   });
 
-  const submit = (status: "Nháp" | "Chờ duyệt") => {
+  const submit = (status: "Nháp" | "Chờ duyệt" | "Đã công bố") => {
     const err = validate(status === "Chờ duyệt");
     if (err) {
       toast.error(err);
