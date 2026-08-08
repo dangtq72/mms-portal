@@ -41,7 +41,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { CbttReport, Status, deleteReport, listReports } from "@/lib/cbtt-store";
+import { ALL_STATUSES, CbttReport, Status, deleteReport, listReports } from "@/lib/cbtt-store";
 
 export const Route = createFileRoute("/cbtt/dinh-ky/")({
   head: () => ({
@@ -121,9 +121,9 @@ function CbttListPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">Tất cả trạng thái</SelectItem>
-                <SelectItem value="Nháp">Nháp</SelectItem>
-                <SelectItem value="Chờ kiểm tra">Chờ kiểm tra</SelectItem>
-                <SelectItem value="Đã công bố">Đã công bố</SelectItem>
+                {ALL_STATUSES.map((s) => (
+                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
