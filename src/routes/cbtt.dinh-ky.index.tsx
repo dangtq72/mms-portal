@@ -56,7 +56,7 @@ export const Route = createFileRoute("/cbtt/dinh-ky/")({
 const STATUS_TONE: Record<Status, string> = {
   "Nháp": "bg-muted text-foreground",
   "Chờ duyệt": "bg-[var(--color-warning)]/15 text-[var(--color-warning)]",
-  "Đã duyệt": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
+  "Đã công bố": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
 };
 
 function CbttListPage() {
@@ -120,7 +120,7 @@ function CbttListPage() {
                 <SelectItem value="ALL">Tất cả trạng thái</SelectItem>
                 <SelectItem value="Nháp">Nháp</SelectItem>
                 <SelectItem value="Chờ duyệt">Chờ duyệt</SelectItem>
-                <SelectItem value="Đã duyệt">Đã duyệt</SelectItem>
+                <SelectItem value="Đã công bố">Đã công bố</SelectItem>
               </SelectContent>
             </Select>
           </div>
