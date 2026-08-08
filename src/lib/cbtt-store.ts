@@ -69,7 +69,7 @@ export type CbttReport = {
   createdBy: string;
 };
 
-const KEY = "cbtt-dinh-ky";
+const KEY = "cbtt-dinh-ky-v2";
 
 function read(): CbttReport[] {
   if (typeof window === "undefined") return [];
@@ -87,36 +87,54 @@ function write(list: CbttReport[]) {
   localStorage.setItem(KEY, JSON.stringify(list));
 }
 
+type SeedRow = {
+  period: Period;
+  newsType: string;
+  title: string;
+  fiscalYear: number;
+  quarter?: 1 | 2 | 3 | 4;
+  status: Status;
+  createdBy: string;
+  note?: string;
+  createdAt: [number, number, number, number, number];
+};
+
+const SEED_ROWS: SeedRow[] = [
+  { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 1 năm 2026", fiscalYear: 2026, quarter: 1, status: "Chờ kiểm tra", createdBy: "Nguyễn Văn A", note: "Chờ chuyên viên kiểm tra", createdAt: [2026, 3, 5, 9, 15] },
+  { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 2 năm 2026", fiscalYear: 2026, quarter: 2, status: "Chờ kiểm tra", createdBy: "Nguyễn Văn A", createdAt: [2026, 6, 8, 10, 40] },
+  { period: "BAN_NIEN", newsType: "Báo cáo tài chính bán niên", title: "Báo cáo tài chính bán niên năm 2026", fiscalYear: 2026, status: "Chờ kiểm tra", createdBy: "Lê Thị Hoa", createdAt: [2026, 7, 12, 14, 5] },
+  { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 3 năm 2025", fiscalYear: 2025, quarter: 3, status: "Chờ VNX duyệt", createdBy: "Trần Thị B", note: "Đã qua kiểm tra", createdAt: [2025, 9, 18, 8, 30] },
+  { period: "NAM", newsType: "Báo cáo tỷ lệ an toàn tài chính tại ngày 31/12", title: "Báo cáo tỷ lệ an toàn tài chính tại ngày 31/12 năm 2025", fiscalYear: 2025, status: "Chờ VNX duyệt", createdBy: "Trần Thị B", createdAt: [2026, 1, 20, 11, 0] },
+  { period: "BAN_NIEN", newsType: "Báo cáo tình hình quản trị công ty bán niên", title: "Báo cáo tình hình quản trị công ty bán niên năm 2025", fiscalYear: 2025, status: "Chờ VNX duyệt", createdBy: "Phạm Minh", createdAt: [2025, 7, 25, 16, 20] },
+  { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 4 năm 2025", fiscalYear: 2025, quarter: 4, status: "Chuyên viên từ chối", createdBy: "Nguyễn Văn A", note: "Thiếu thuyết minh BCTC", createdAt: [2026, 0, 15, 9, 45] },
+  { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 2 năm 2025", fiscalYear: 2025, quarter: 2, status: "Chuyên viên từ chối", createdBy: "Lê Thị Hoa", note: "Sai số liệu lợi nhuận", createdAt: [2025, 6, 22, 13, 10] },
+  { period: "BAN_NIEN", newsType: "Báo cáo tỷ lệ an toàn tài chính tại ngày 30/6", title: "Báo cáo tỷ lệ an toàn tài chính tại ngày 30/6 năm 2025", fiscalYear: 2025, status: "Chuyên viên từ chối", createdBy: "Phạm Minh", note: "Thiếu chữ ký số", createdAt: [2025, 7, 2, 15, 35] },
+  { period: "NAM", newsType: "Báo cáo thường niên", title: "Báo cáo thường niên năm 2024", fiscalYear: 2024, status: "VNX từ chối", createdBy: "Trần Thị B", note: "Nội dung chưa đầy đủ theo mẫu", createdAt: [2025, 2, 28, 10, 5] },
+  { period: "NAM", newsType: "Báo cáo tình hình quản trị công ty năm", title: "Báo cáo tình hình quản trị công ty năm 2024", fiscalYear: 2024, status: "VNX từ chối", createdBy: "Nguyễn Văn A", note: "Đề nghị giải trình bổ sung", createdAt: [2025, 1, 14, 9, 25] },
+  { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 1 năm 2025", fiscalYear: 2025, quarter: 1, status: "Đã công bố", createdBy: "Nguyễn Văn A", createdAt: [2025, 3, 18, 8, 50] },
+  { period: "BAN_NIEN", newsType: "Báo cáo tài chính bán niên", title: "Báo cáo tài chính bán niên năm 2025", fiscalYear: 2025, status: "Đã công bố", createdBy: "Lê Thị Hoa", createdAt: [2025, 7, 14, 11, 30] },
+  { period: "NAM", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính năm 2024", fiscalYear: 2024, status: "Đã công bố", createdBy: "Trần Thị B", note: "Đã ký số", createdAt: [2025, 2, 20, 14, 45] },
+  { period: "NAM", newsType: "Báo cáo thường niên", title: "Báo cáo thường niên năm 2025", fiscalYear: 2025, status: "Đã công bố", createdBy: "Phạm Minh", createdAt: [2026, 2, 31, 17, 0] },
+];
+
 function seed(): CbttReport[] {
-  const sample: CbttReport[] = [
-    {
+  const sample: CbttReport[] = SEED_ROWS.map((r) => {
+    const [y, m, d, hh, mm] = r.createdAt;
+    return {
       id: crypto.randomUUID(),
-      period: "QUY",
-      newsType: "Báo cáo tài chính quý",
-      title: "Báo cáo tài chính Q1/2026",
-      fiscalYear: 2026,
-      quarter: 1,
-      issuedAt: new Date(2026, 3, 20).toISOString(),
-      note: "Đã ký số",
+      period: r.period,
+      newsType: r.newsType,
+      title: r.title,
+      fiscalYear: r.fiscalYear,
+      quarter: r.quarter,
+      issuedAt: new Date(y, m, d).toISOString(),
+      note: r.note ?? "",
       sections: {},
-      status: "Nháp",
-      createdAt: new Date(2026, 4, 8, 9, 30).toISOString(),
-      createdBy: "Nguyễn Văn A",
-    },
-    {
-      id: crypto.randomUUID(),
-      period: "NAM",
-      newsType: "Báo cáo thường niên",
-      title: "Báo cáo thường niên 2025",
-      fiscalYear: 2025,
-      issuedAt: new Date(2026, 2, 31).toISOString(),
-      note: "",
-      sections: {},
-      status: "Đã công bố",
-      createdAt: new Date(2026, 3, 2, 14, 5).toISOString(),
-      createdBy: "Trần Thị B",
-    },
-  ];
+      status: r.status,
+      createdAt: new Date(y, m, d, hh, mm).toISOString(),
+      createdBy: r.createdBy,
+    };
+  });
   write(sample);
   return sample;
 }
