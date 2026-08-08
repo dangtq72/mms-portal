@@ -120,7 +120,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
     return null;
   };
 
-  const buildPayload = (status: "Nháp" | "Chờ duyệt" | "Đã công bố") => ({
+  const buildPayload = (status: "Nháp" | "Chờ kiểm tra" | "Đã công bố") => ({
     period: form.period as Period,
     newsType: form.newsType,
     title: form.title.trim(),
@@ -132,8 +132,8 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
     status,
   });
 
-  const submit = (status: "Nháp" | "Chờ duyệt" | "Đã công bố") => {
-    const err = validate(status === "Chờ duyệt");
+  const submit = (status: "Nháp" | "Chờ kiểm tra" | "Đã công bố") => {
+    const err = validate(status === "Chờ kiểm tra");
     if (err) {
       toast.error(err);
       return;
@@ -361,7 +361,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
         <Button variant="secondary" onClick={() => submit("Nháp")}>
           Lưu nháp
         </Button>
-        <Button className="text-white hover:opacity-90" style={{ background: "var(--color-cta-gradient)" }} onClick={() => submit("Chờ duyệt")}>Gửi duyệt</Button>
+        <Button className="text-white hover:opacity-90" style={{ background: "var(--color-cta-gradient)" }} onClick={() => submit("Chờ kiểm tra")}>Gửi duyệt</Button>
       </div>
     </div>
   );

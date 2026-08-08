@@ -1,7 +1,7 @@
 // LocalStorage-backed store for "CBTT định kỳ" reports (mock backend).
 
 export type Period = "QUY" | "BAN_NIEN" | "NAM";
-export type Status = "Nháp" | "Chờ duyệt" | "Đã công bố";
+export type Status = "Nháp" | "Chờ kiểm tra" | "Đã công bố";
 
 export const PERIOD_LABEL: Record<Period, string> = {
   QUY: "Theo quý",
