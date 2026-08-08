@@ -132,7 +132,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
     status,
   });
 
-  const submit = (status: "Nháp" | "Chờ duyệt") => {
+  const submit = (status: "Nháp" | "Chờ duyệt" | "Đã công bố") => {
     const err = validate(status === "Chờ duyệt");
     if (err) {
       toast.error(err);
