@@ -133,9 +133,8 @@ function CbttListPage() {
           </Button>
         </div>
 
-        <div className="rounded-xl border border-border bg-[var(--color-surface)] p-4 shadow-sm">
-          <div className="overflow-hidden rounded-lg border border-border">
-            <Table>
+        <div className="bg-[var(--color-surface)]">
+          <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-12">STT</TableHead>
