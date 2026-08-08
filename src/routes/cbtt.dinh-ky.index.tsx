@@ -211,7 +211,6 @@ function CbttListPage() {
                 ))}
               </TableBody>
             </Table>
-          </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <span className="text-xs text-muted-foreground">
