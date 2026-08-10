@@ -69,7 +69,7 @@ export type CbttReport = {
   createdBy: string;
 };
 
-const KEY = "cbtt-dinh-ky-v2";
+const KEY = "cbtt-dinh-ky-v3";
 
 function read(): CbttReport[] {
   if (typeof window === "undefined") return [];
@@ -102,7 +102,7 @@ type SeedRow = {
 const SEED_ROWS: SeedRow[] = [
   { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 1 năm 2026", fiscalYear: 2026, quarter: 1, status: "Chờ kiểm tra", createdBy: "Nguyễn Văn A", note: "Chờ chuyên viên kiểm tra", createdAt: [2026, 3, 5, 9, 15] },
   { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 2 năm 2026", fiscalYear: 2026, quarter: 2, status: "Chờ kiểm tra", createdBy: "Nguyễn Văn A", createdAt: [2026, 6, 8, 10, 40] },
-  { period: "BAN_NIEN", newsType: "Báo cáo tài chính bán niên", title: "Báo cáo tài chính bán niên năm 2026", fiscalYear: 2026, status: "Chờ kiểm tra", createdBy: "Lê Thị Hoa", createdAt: [2026, 7, 12, 14, 5] },
+  { period: "BAN_NIEN", newsType: "Báo cáo tài chính bán niên", title: "Báo cáo tài chính bán niên năm 2026", fiscalYear: 2026, status: "Nháp", createdBy: "Lê Thị Hoa", createdAt: [2026, 7, 12, 14, 5] },
   { period: "QUY", newsType: "Báo cáo tài chính", title: "Báo cáo tài chính Quý 3 năm 2025", fiscalYear: 2025, quarter: 3, status: "Chờ VNX duyệt", createdBy: "Trần Thị B", note: "Đã qua kiểm tra", createdAt: [2025, 9, 18, 8, 30] },
   { period: "NAM", newsType: "Báo cáo tỷ lệ an toàn tài chính tại ngày 31/12", title: "Báo cáo tỷ lệ an toàn tài chính tại ngày 31/12 năm 2025", fiscalYear: 2025, status: "Chờ VNX duyệt", createdBy: "Trần Thị B", createdAt: [2026, 1, 20, 11, 0] },
   { period: "BAN_NIEN", newsType: "Báo cáo tình hình quản trị công ty bán niên", title: "Báo cáo tình hình quản trị công ty bán niên năm 2025", fiscalYear: 2025, status: "Chờ VNX duyệt", createdBy: "Phạm Minh", createdAt: [2025, 7, 25, 16, 20] },
