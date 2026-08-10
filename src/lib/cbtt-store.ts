@@ -69,7 +69,7 @@ export type CbttReport = {
   createdBy: string;
 };
 
-const KEY = "cbtt-dinh-ky-v2";
+const KEY = "cbtt-dinh-ky-v3";
 
 function read(): CbttReport[] {
   if (typeof window === "undefined") return [];
