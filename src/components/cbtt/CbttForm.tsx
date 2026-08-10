@@ -38,6 +38,7 @@ type FormState = {
   period: Period | "";
   newsType: string;
   title: string;
+  titleEn: string;
   fiscalYear: number | "";
   quarter: 1 | 2 | 3 | 4 | "";
   issuedAt: Date | undefined;
