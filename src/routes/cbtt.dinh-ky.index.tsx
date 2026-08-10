@@ -99,27 +99,32 @@ function CbttListPage() {
     <AppShell activeKey="cbtt">
       <main className="mx-auto max-w-7xl space-y-5 px-6 py-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-4">
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Tìm theo tiêu đề..."
+                placeholder="Tiêu đề tin..."
                 className="h-9 w-[260px] pl-8"
               />
             </div>
-            <Select value={status} onValueChange={(v) => setStatus(v as Status | "ALL")}>
-              <SelectTrigger className="h-9 w-[180px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ALL">Tất cả trạng thái</SelectItem>
-                {ALL_STATUSES.map((s) => (
-                  <SelectItem key={s} value={s}>{s}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex items-center gap-2">
+              <label htmlFor="filter-status" className="text-sm text-muted-foreground">
+                Trạng thái
+              </label>
+              <Select value={status} onValueChange={(v) => setStatus(v as Status | "ALL")}>
+                <SelectTrigger id="filter-status" className="h-9 w-[180px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ALL">Tất cả</SelectItem>
+                  {ALL_STATUSES.map((s) => (
+                    <SelectItem key={s} value={s}>{s}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <Button
             className="text-white hover:opacity-90"
@@ -130,7 +135,8 @@ function CbttListPage() {
           </Button>
         </div>
 
-        <div className="bg-[var(--color-surface)]">
+        <div className="overflow-hidden rounded-xl border border-border bg-[var(--color-surface)] shadow-[0_1px_3px_rgba(16,24,40,0.06),0_8px_24px_-12px_rgba(16,24,40,0.12)]">
+
           <Table>
               <TableHeader>
                 <TableRow>
