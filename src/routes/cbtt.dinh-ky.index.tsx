@@ -56,6 +56,11 @@ const STATUS_TONE: Record<Status, string> = {
   "Đã công bố": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
 };
 
+const pageBtn =
+  "inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-border bg-background px-2.5 text-sm font-medium text-foreground transition hover:bg-accent disabled:pointer-events-none disabled:opacity-50";
+
+
+
 function CbttListPage() {
   const navigate = useNavigate();
   const [items, setItems] = useState<CbttReport[]>([]);
