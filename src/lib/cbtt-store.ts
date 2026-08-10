@@ -59,6 +59,7 @@ export type CbttReport = {
   period: Period;
   newsType: string;
   title: string;
+  titleEn?: string;
   fiscalYear: number;
   quarter?: 1 | 2 | 3 | 4;
   issuedAt: string; // ISO date
