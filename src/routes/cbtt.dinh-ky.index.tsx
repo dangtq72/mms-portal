@@ -243,11 +243,8 @@ function CbttListPage() {
                   type="button"
                   onClick={() => setPage(p)}
                   aria-current={p === safePage ? "page" : undefined}
-                  className={cn(
-                    pageBtn,
-                    p === safePage &&
-                      "border-transparent bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]",
-                  )}
+                  className={cn(pageBtn, p === safePage && "border-transparent text-white")}
+                  style={p === safePage ? { background: "var(--color-cta-gradient)" } : undefined}
                 >
                   {p}
                 </button>
