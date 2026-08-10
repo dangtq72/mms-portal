@@ -142,7 +142,7 @@ function CbttListPage() {
                 <TableRow>
                   <TableHead className="w-12">STT</TableHead>
                   <TableHead>Tiêu đề</TableHead>
-                  <TableHead className="w-[130px]">Trạng thái</TableHead>
+                  <TableHead className="w-[170px]">Trạng thái</TableHead>
                   <TableHead className="w-[140px]">Ngày tạo</TableHead>
                   <TableHead className="w-[180px]">Người tạo</TableHead>
                   <TableHead>Ghi chú</TableHead>
@@ -170,7 +170,7 @@ function CbttListPage() {
                       </Link>
                     </TableCell>
                     <TableCell>
-                      <Badge className={STATUS_TONE[r.status]} variant="secondary">
+                      <Badge className={`${STATUS_TONE[r.status]} whitespace-nowrap`} variant="secondary">
                         {r.status}
                       </Badge>
                     </TableCell>
