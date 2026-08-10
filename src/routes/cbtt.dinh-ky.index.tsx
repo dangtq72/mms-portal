@@ -23,14 +23,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { cn } from "@/lib/utils";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -61,6 +55,11 @@ const STATUS_TONE: Record<Status, string> = {
   "VNX từ chối": "bg-destructive/12 text-destructive",
   "Đã công bố": "bg-[var(--color-success)]/15 text-[var(--color-success)]",
 };
+
+const pageBtn =
+  "inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-border bg-background px-2.5 text-sm font-medium text-foreground transition hover:bg-accent disabled:pointer-events-none disabled:opacity-50";
+
+
 
 function CbttListPage() {
   const navigate = useNavigate();
@@ -105,27 +104,32 @@ function CbttListPage() {
     <AppShell activeKey="cbtt">
       <main className="mx-auto max-w-7xl space-y-5 px-6 py-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-4">
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Tìm theo tiêu đề..."
+                placeholder="Tiêu đề tin..."
                 className="h-9 w-[260px] pl-8"
               />
             </div>
-            <Select value={status} onValueChange={(v) => setStatus(v as Status | "ALL")}>
-              <SelectTrigger className="h-9 w-[180px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ALL">Tất cả trạng thái</SelectItem>
-                {ALL_STATUSES.map((s) => (
-                  <SelectItem key={s} value={s}>{s}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex items-center gap-2">
+              <label htmlFor="filter-status" className="text-sm text-muted-foreground">
+                Trạng thái
+              </label>
+              <Select value={status} onValueChange={(v) => setStatus(v as Status | "ALL")}>
+                <SelectTrigger id="filter-status" className="h-9 w-[180px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ALL">Tất cả</SelectItem>
+                  {ALL_STATUSES.map((s) => (
+                    <SelectItem key={s} value={s}>{s}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <Button
             className="text-white hover:opacity-90"
@@ -136,7 +140,8 @@ function CbttListPage() {
           </Button>
         </div>
 
-        <div className="bg-[var(--color-surface)]">
+        <div className="overflow-hidden rounded-xl border border-border bg-[var(--color-surface)] shadow-[0_1px_3px_rgba(16,24,40,0.06),0_8px_24px_-12px_rgba(16,24,40,0.12)]">
+
           <Table>
               <TableHeader>
                 <TableRow>
@@ -214,42 +219,52 @@ function CbttListPage() {
                 ))}
               </TableBody>
             </Table>
-
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-muted-foreground">
-              Hiển thị {filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1} -{" "}
-              {Math.min(safePage * pageSize, filtered.length)} / {filtered.length} bản ghi
-            </span>
-            {totalPages > 1 && (
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      onClick={() => setPage((p) => Math.max(1, p - 1))}
-                      className={safePage <= 1 ? "pointer-events-none opacity-50" : ""}
-                    />
-                  </PaginationItem>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                    <PaginationItem key={p}>
-                      <PaginationLink
-                        isActive={p === safePage}
-                        onClick={() => setPage(p)}
-                      >
-                        {p}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationNext
-                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                      className={safePage >= totalPages ? "pointer-events-none opacity-50" : ""}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            )}
-          </div>
         </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="text-sm text-muted-foreground">
+            {filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1}–
+            {Math.min(safePage * pageSize, filtered.length)} trên {filtered.length} tin
+          </span>
+          {totalPages > 1 && (
+            <nav aria-label="Phân trang" className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Trang trước"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={safePage <= 1}
+                className={pageBtn}
+              >
+                {"<<"}
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => setPage(p)}
+                  aria-current={p === safePage ? "page" : undefined}
+                  className={cn(
+                    pageBtn,
+                    p === safePage &&
+                      "border-transparent bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]",
+                  )}
+                >
+                  {p}
+                </button>
+              ))}
+              <button
+                type="button"
+                aria-label="Trang sau"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={safePage >= totalPages}
+                className={pageBtn}
+              >
+                {">>"}
+              </button>
+            </nav>
+          )}
+        </div>
+
       </main>
 
       <AlertDialog open={!!pendingDelete} onOpenChange={(v) => !v && setPendingDelete(null)}>
