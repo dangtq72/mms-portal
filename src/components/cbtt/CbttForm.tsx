@@ -52,6 +52,7 @@ function toFormState(r?: CbttReport): FormState {
       period: "",
       newsType: "",
       title: "",
+      titleEn: "",
       fiscalYear: new Date().getFullYear(),
       quarter: "",
       issuedAt: undefined,
@@ -63,6 +64,7 @@ function toFormState(r?: CbttReport): FormState {
     period: r.period,
     newsType: r.newsType,
     title: r.title,
+    titleEn: r.titleEn ?? "",
     fiscalYear: r.fiscalYear,
     quarter: r.quarter ?? "",
     issuedAt: new Date(r.issuedAt),
@@ -125,6 +127,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
     period: form.period as Period,
     newsType: form.newsType,
     title: form.title.trim(),
+    titleEn: form.titleEn.trim() || undefined,
     fiscalYear: Number(form.fiscalYear),
     quarter: form.period === "QUY" ? (form.quarter as 1 | 2 | 3 | 4) : undefined,
     issuedAt: (form.issuedAt ?? new Date()).toISOString(),
@@ -270,6 +273,18 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
             value={form.title}
             onChange={(e) => setForm((s) => ({ ...s, title: e.target.value }))}
             placeholder="Nhập tiêu đề tin công bố"
+            className={fieldClass}
+          />
+        </div>
+
+        {/* Tiêu đề tiếng Anh */}
+        <div className="space-y-2 md:col-span-3">
+          <Label htmlFor="titleEn">Tiêu đề tiếng Anh</Label>
+          <Input
+            id="titleEn"
+            value={form.titleEn}
+            onChange={(e) => setForm((s) => ({ ...s, titleEn: e.target.value }))}
+            placeholder="Nhập tiêu đề tiếng Anh (không bắt buộc)"
             className={fieldClass}
           />
         </div>
