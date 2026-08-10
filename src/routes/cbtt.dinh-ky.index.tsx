@@ -214,42 +214,52 @@ function CbttListPage() {
                 ))}
               </TableBody>
             </Table>
-
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-muted-foreground">
-              Hiển thị {filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1} -{" "}
-              {Math.min(safePage * pageSize, filtered.length)} / {filtered.length} bản ghi
-            </span>
-            {totalPages > 1 && (
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      onClick={() => setPage((p) => Math.max(1, p - 1))}
-                      className={safePage <= 1 ? "pointer-events-none opacity-50" : ""}
-                    />
-                  </PaginationItem>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                    <PaginationItem key={p}>
-                      <PaginationLink
-                        isActive={p === safePage}
-                        onClick={() => setPage(p)}
-                      >
-                        {p}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                  <PaginationItem>
-                    <PaginationNext
-                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                      className={safePage >= totalPages ? "pointer-events-none opacity-50" : ""}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            )}
-          </div>
         </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="text-sm text-muted-foreground">
+            {filtered.length === 0 ? 0 : (safePage - 1) * pageSize + 1}–
+            {Math.min(safePage * pageSize, filtered.length)} trên {filtered.length} tin
+          </span>
+          {totalPages > 1 && (
+            <nav aria-label="Phân trang" className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Trang trước"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={safePage <= 1}
+                className={pageBtn}
+              >
+                {"<<"}
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => setPage(p)}
+                  aria-current={p === safePage ? "page" : undefined}
+                  className={cn(
+                    pageBtn,
+                    p === safePage &&
+                      "border-transparent bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand)]",
+                  )}
+                >
+                  {p}
+                </button>
+              ))}
+              <button
+                type="button"
+                aria-label="Trang sau"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={safePage >= totalPages}
+                className={pageBtn}
+              >
+                {">>"}
+              </button>
+            </nav>
+          )}
+        </div>
+
       </main>
 
       <AlertDialog open={!!pendingDelete} onOpenChange={(v) => !v && setPendingDelete(null)}>
