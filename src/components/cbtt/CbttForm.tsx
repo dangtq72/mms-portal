@@ -267,7 +267,7 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
 
         {/* Tiêu đề */}
         <div className="space-y-2 md:col-span-3">
-          <Label htmlFor="title">Tiêu đề <span className="text-destructive">*</span></Label>
+          <Label htmlFor="title">Tiêu đề tiếng Việt <span className="text-destructive">*</span></Label>
           <Input
             id="title"
             value={form.title}
