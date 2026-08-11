@@ -161,10 +161,9 @@ export function CbttForm({ existing }: { existing?: CbttReport }) {
   ];
 
   const fieldClass =
-    "bg-[var(--color-surface)] text-foreground shadow-sm " +
-    "hover:border-primary focus:border-primary focus-visible:border-primary focus-visible:ring-primary " +
     "disabled:bg-muted disabled:text-muted-foreground disabled:opacity-100 disabled:cursor-not-allowed " +
     "data-[disabled]:bg-muted data-[disabled]:text-muted-foreground data-[disabled]:opacity-100";
+
 
   return (
     <div className="space-y-6">
